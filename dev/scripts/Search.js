@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import ReactDOM from 'react-dom';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import axios from 'axios';
 import DrinkList from './DrinkList'
 import {imgStyle} from './app'
@@ -61,6 +61,7 @@ export default class Search extends React.Component {
     render() {
         return (
             <Fragment>
+                <Link to={'/'}>Home</Link>
                 <form onSubmit={this.getDrinksList}>
                     <label htmlFor="ByName">Search by Name</label>
                     <input type="text" name='name' id='byName' value={this.state.byName} onChange={this.userInput} />
