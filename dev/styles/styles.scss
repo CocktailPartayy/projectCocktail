@@ -1,3 +1,16 @@
+@import '../styles/_setup.scss';
+
+// colors
+$green: #2A4F5C;
+$pink: #EBBBC9;
+$grey: #BAC0C5;
+$white: #FFFFFF;
+
+// fonts
+$heading: "Oswald", sans-serif;
+$body: 'Roboto', sans-serif;
+
+
 .showLocationInput, .recipe-card, .addCocktail {
     opacity: 0;
     display: none;
@@ -6,4 +19,31 @@
 .show {
     opacity:1;
     display:block;
+}
+
+.sign-in {
+    height: 100vh;
+    padding-top: 50px;
+    background: $grey;
+    div {
+        width: 40%;  
+        margin: 0 auto;
+        img {
+            width: 100%;
+        }
+        button {
+            margin-top: 20px;
+            width: 30%;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: $heading;
+            border-radius: 20px;
+            background: $green;
+            color: white;
+            font-size: 30px;
+            text-transform: capitalize;
+        }
+    }
+    // background: url('../../assets/signin-bkg.png') center no-repeat;
 }
