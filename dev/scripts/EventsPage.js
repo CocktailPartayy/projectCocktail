@@ -59,7 +59,6 @@ class EventsPage extends React.Component {
         this.setState({
             eventDate: '',
             eventDescription: '',
-
         })
     }
 
