@@ -93,12 +93,16 @@ class EventsPage extends React.Component {
                     })}
                 </div> */}
 
-                <section className="events">
+                {/* <Link to={`/events/${this.props.eventKey}`}> */}
                     {this.state.events.map((event, key) => {
-                        return <EventCard key={event.key} event={event} remove={this.removeEvent} eventKey={event.key}/> 
+                        return (
+                            <Link to={`/events/${event.key}`} key={event.key}>
+                                <EventCard key={event.key} event={event} remove={this.removeEvent} />
+                            </Link>
+                        )
                     })}
-                </section>
-            </React.Fragment>
+                {/* </Link> */}
+            // </React.Fragment>
         )
     }
 }
@@ -106,8 +110,8 @@ class EventsPage extends React.Component {
 const EventCard = (props) => {
     return (
         <React.Fragment>
-            {console.log(props)}
-            <Link to={`/events/${props.eventKey}`} params={{name: props.event.eventName}}>stuff</Link>
+            {/* {console.log(props)} */}
+            {/* <Link to={`/events/event${props.eventKey}`} params={{name: props.event.eventName}}>stuff</Link> */}
                 <div>
                     <p>{props.event.eventName}</p>
                     <ul>
@@ -123,4 +127,4 @@ const EventCard = (props) => {
 }
 
 // export default EventsPage;
-export { EventsPage, EventCard };
+export default EventsPage;
