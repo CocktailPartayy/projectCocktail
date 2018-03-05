@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import configKey from './config-key';
-import { EventsPage,  EventCard } from './EventsPage';
+// import { EventsPage,  EventCard } from './EventsPage';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import Search from './Search'
 import Drink from './Drink'
@@ -153,7 +153,17 @@ class Home extends React.Component {
           </Fragment>
   
   
-          : <button onClick={this.signIn}>sign in</button>}
+          : 
+
+          <div className="sign-in">
+            <div><img className='animated tada infinite' src='../../assets/signin-bkg.png' alt=""/></div>
+            <div>
+            {/* <h1>Cocktail Partayyy</h1> */}
+            <button onClick={this.signIn}>sign in!</button>
+            </div>
+          </div>
+          
+          }
 
       </Fragment>
     )

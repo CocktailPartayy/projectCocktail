@@ -17,7 +17,7 @@ export default class DrinkList extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.drinks);
+        // console.log(this.props.drinks);
         const drinks = this.props.drinks;
         this.setState({
             instructions: drinks.strInstructions

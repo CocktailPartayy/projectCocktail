@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import configKey from './config-key';
 import axios from 'axios';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import DrinkLocations from './DrinkLocations'
 
 
 
@@ -27,10 +28,9 @@ export default class Drink extends React.Component {
         //     drinksList: this.props.drinksList
         // })
         
-        
         axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${this.state.id}`, {
         }).then(({data} ) => {
-            console.log(data.drinks[0]);
+            // console.log(data.drinks[0]);
             const drinkDetails = data.drinks[0];
             const drinkIng = []
             this.setState({
@@ -49,11 +49,6 @@ export default class Drink extends React.Component {
                 }
 
             }
-            // drinksListz.push(data.drinks[0]);
-            // this.setState({
-            //     byIng: '',
-            //     drinksList: drinksListz
-            // })
         }); 
         
     }
@@ -67,7 +62,12 @@ export default class Drink extends React.Component {
             <p>{this.state.drinkIns}</p>
             <ul>
                 {this.state.drinkIng.map(ing=>{
-                    return <li key={`${this.state.id}-${ing}`}>{ing}</li>
+                    return (
+                        <li key={`${this.state.id}-${ing}`}>
+                                <p>{ing}</p>
+                                <DrinkLocations ingredient={ing} />
+                        </li>
+                    )
                 })}
             </ul>
            </div>
