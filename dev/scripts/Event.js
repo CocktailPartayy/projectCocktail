@@ -16,20 +16,39 @@ export default class Event extends React.Component {
         super();
         this.state={
             url: '',
-            userId: ''
+            userId: '',
+            eName: '',
+            eDate: '',
+            eDesc: '',
+            users: []
         };
         // this.handleClick = this.handleClick.bind(this);
     }
     componentDidMount(){
-        console.log(this);
+       
+        // const dbRef = firebase.database().ref(``)
         // const userId = firebase.auth().currentUser.uid;
-        // console.log(userId);
-        // this.setState({
-        //     url: this.props.match.url
-        //     // userId
-        // })
-    //     // console.log(this.state.url);
+        const dbRef = firebase.database().ref(`/users/${this.state.userId}${this.state.url}`);
+        dbRef.on('value', (snapshot) => {
+            console.log(snapshot.val());
+            const e = snapshot.val()
+            this.setState({
+                eName: e.eventName,
+                eDate: e.eventDate,
+                eDesc: e.eventDescription
+            })
+        })
+        
+    //    console.log(this.props)
     }
+    
+    componentWillMount() {
+        this.setState({
+            url: this.props.match.url,
+            userId: this.props.user.uid
+        });
+    }
+    
     
     // componentWillUpdate (){
     //     // const userId = firebase.auth().currentUser.uid;
@@ -51,18 +70,18 @@ export default class Event extends React.Component {
         // })
         // console.log(this.state.userId);
 
-        // const dbRef = firebase.database().ref(``)
-        // const userId = firebase.auth().currentUser.uid;
-
-        // const dbRef = firebase.database().ref(`/users/${this.state.userId}${this.state.url}`);
-        // dbRef.on('value', (snapshot) => {
-        //     console.log(snapshot);
-        // })
+        // 
         
     // }
 
     render(){
-        return <button onClick={this.handleClick}>get my shit</button>
+        return (
+           <Fragment>
+                <h2>{this.state.eName}</h2>
+                <p>{this.state.eDate}</p>
+                <p>{this.state.eDesc}</p>
+           </Fragment>
+        )
     }
 
 }
