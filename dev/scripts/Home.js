@@ -4,22 +4,15 @@ import axios from 'axios';
 import configKey from './config-key';
 // import { EventsPage,  EventCard } from './EventsPage';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
-import Search from './Search';
-import Drink from './Drink';
-import Event from './Event';
+import Search from './Search'
+import Drink from './Drink'
+// import Home from './Home'
+import EventsPage from './EventsPage'
+import Event from './Event'
 // import EventsPage from './EventsPage'
 
 
-// initialize firebase
-var config = {
-    apiKey: "AIzaSyAKuFRAm4lX_T_9PitdDB7dZHyzDKDMyk8",
-    authDomain: "cocktail-party-28499.firebaseapp.com",
-    databaseURL: "https://cocktail-party-28499.firebaseio.com",
-    projectId: "cocktail-party-28499",
-    storageBucket: "",
-    messagingSenderId: "882276644580"
-};
-firebase.initializeApp(config);
+
 
 class Home extends React.Component {
     constructor() {
@@ -91,7 +84,8 @@ class Home extends React.Component {
 
     render() {
         return (
-
+            
+            <BrowserRouter>
             <Fragment>
                 {this.state.loggedIn ?
                     <Fragment>
@@ -100,10 +94,10 @@ class Home extends React.Component {
                         <Link to={`/events`}>Events</Link>
                         <Link to={`/search`}>Search</Link>
                         <button onClick={this.signOut}>sign out</button>
-                        <button onClick={this.retrieveEvent}>get my shit</button>
+                        {/* <button onClick={this.retrieveEvent}>get my shit</button> */}
                         {/* what i wanna do is  <Search /> <Events /> <Favs /> */}
 
-                        <Search />
+                        {/* <Search /> */}
                         {/* <Event /> */}
                         
                         {/* <Brent events={this.state.events} /> */}
@@ -123,9 +117,40 @@ class Home extends React.Component {
 
                 }
 
+                    <Fragment>
+                        {/* <Route  path='/'  exact component={Home} /> */}
+                        {/* <Route path='/drink/:drinkID' component={Drink} /> */}
+                        <Route path='/search' exact component={Search} />
+                        <Route path='/search/:searchId' exact component={Drink} />
+
+                        <Route path='/events' exact component={EventsPage} />
+                        {/* <Route path='/events/:eventsId' exact component={Event} /> */}
+                        <Route path='/events/:eventsId'  exact render={(props)=><Event {...this.state} {...props} />} />
+                        
+
+
+                        {/* <Route path='/events/:eventsId' exact render={(props) => ( */}
+                        {/* <EventCard  {...props }/>)}  />  */}
+                        {/* <Route path='/events/:eventsID' params={{ name: props.eventName.eventName }} component={EventCard} /> */}
+                    </Fragment>
+
             </Fragment>
+                </BrowserRouter>
         )
     }
 }
 
 export default Home;
+
+
+{/* linda's example
+    <Route
+    path="/invite/:eventid" exact
+    render={(props) => (
+        <InviteLandingPage {...this.state.user}
+            {...props}
+            showLogin={this.showLogin}
+            showSignUp={this.showSignUp}
+            closeModal={this.closeModal}
+        />)}
+/> */}
