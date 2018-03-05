@@ -1,5 +1,7 @@
 import React from 'react'; 
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import Event from './Event';
+
 
 
 class EventsPage extends React.Component {
@@ -72,9 +74,9 @@ class EventsPage extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Link to={`/`}>Home</Link>
+                {/* <Link to={`/`}>Home</Link>
                 <Link to={`/events`}>Events</Link>
-                <Link to={`/search`}>Search</Link>
+                <Link to={`/search`}>Search</Link> */}
                 <form onSubmit={this.addEvent}>
                     <h2>Let's Create An Event</h2>
                     <label htmlFor="eventName">Event Name:</label>
@@ -87,6 +89,7 @@ class EventsPage extends React.Component {
                     <textarea name="eventDescription" value={this.state.eventDescription} id="eventDescription" cols="10" rows="5" onChange={this.handleChange} placeholder="Details"></textarea>
                     <input type="submit" value="Add Event"/>
                 </form>
+                {/* <Event /> */}
                 {/* <div>
                     {this.state.events.map((event, key) => {
                         return event.eventName

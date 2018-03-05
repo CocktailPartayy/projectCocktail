@@ -10,3 +10,5 @@ shit to fix
 notes about routing incase i forgot the next day
 Route as would in app component
 in the actual drink component, search id is passed as a property in params, in urls, in match, use such property to remake axios call and go from there
+
+
