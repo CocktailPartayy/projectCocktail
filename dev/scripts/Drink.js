@@ -56,7 +56,7 @@ export default class Drink extends React.Component {
     render(){
         return (
            <div>
-            <Link to={`/search`}>Search</Link>
+            {/* <Link to={`/search`}>Search</Link> */}
             <h2>{this.state.drinkName}</h2>
             <img src={this.state.drinkPic} alt=""/>
             <p>{this.state.drinkIns}</p>
