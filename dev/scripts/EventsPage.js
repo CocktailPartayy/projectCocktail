@@ -1,4 +1,6 @@
 import React from 'react'; 
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+
 
 class EventsPage extends React.Component {
     constructor() {
@@ -7,8 +9,9 @@ class EventsPage extends React.Component {
             events: [],
             eventName: '',
             eventDate: '',
-            eventDescription: '',
-            eventid: ''
+            eventDescription: ''
+            // users: []
+
         }
         this.handleChange = this.handleChange.bind(this);
         this.addEvent = this.addEvent.bind(this);
@@ -26,18 +29,12 @@ class EventsPage extends React.Component {
                 eventdata[eventKey].key = eventKey;
                 eventsArray.push(eventdata[eventKey])
             }
-            console.log(eventsArray)
+            // console.log(eventsArray)
             this.setState({
-                events: eventsArray,
-                loggedIn: true
+                events: eventsArray
             });
             });
-        } else {
-            this.setState({
-            events: [],
-            loggedIn: false
-            })
-        }
+        } 
         });
     }
 
@@ -56,12 +53,13 @@ class EventsPage extends React.Component {
         }
 
         const userId = firebase.auth().currentUser.uid;
-        const dbRef = firebase.database().ref(`users/${userId}/events/`)
+        const dbRef = firebase.database().ref(`users/${userId}/events`)
         dbRef.push(events);
 
         this.setState({
             eventDate: '',
-            eventDescription: ''
+            eventDescription: '',
+
         })
     }
 
@@ -74,6 +72,9 @@ class EventsPage extends React.Component {
     render() {
         return (
             <React.Fragment>
+                <Link to={`/`}>Home</Link>
+                <Link to={`/events`}>Events</Link>
+                <Link to={`/search`}>Search</Link>
                 <form onSubmit={this.addEvent}>
                     <h2>Let's Create An Event</h2>
                     <label htmlFor="eventName">Event Name:</label>
@@ -86,13 +87,22 @@ class EventsPage extends React.Component {
                     <textarea name="eventDescription" value={this.state.eventDescription} id="eventDescription" cols="10" rows="5" onChange={this.handleChange} placeholder="Details"></textarea>
                     <input type="submit" value="Add Event"/>
                 </form>
-
-                <section className="events">
+                {/* <div>
                     {this.state.events.map((event, key) => {
-                        return <EventCard key={event.key} eventName={event} remove={this.removeEvent} eventKey={event.key}/> 
+                        return event.eventName
                     })}
-                </section>
-            </React.Fragment>
+                </div> */}
+
+                {/* <Link to={`/events/${this.props.eventKey}`}> */}
+                    {this.state.events.map((event, key) => {
+                        return (
+                            <Link to={`/events/${event.key}`} key={event.key}>
+                                <EventCard key={event.key} event={event} remove={this.removeEvent} />
+                            </Link>
+                        )
+                    })}
+                {/* </Link> */}
+            // </React.Fragment>
         )
     }
 }
@@ -100,14 +110,21 @@ class EventsPage extends React.Component {
 const EventCard = (props) => {
     return (
         <React.Fragment>
-            <p>{props.eventName.eventName}</p>
-            <ul>
-                <li>Event Date: {props.eventName.eventDate}</li>
-                <li>Event Description:{props.eventName.eventDescription}</li>
-            </ul>
-            <button className="remove-btn" onClick={() => props.remove(props.eventKey)}><i className="far fa-times-circle"></i></button>
+            {/* {console.log(props)} */}
+            {/* <Link to={`/events/event${props.eventKey}`} params={{name: props.event.eventName}}>stuff</Link> */}
+                <div>
+                    <p>{props.event.eventName}</p>
+                    <ul>
+                        <li>Event Date: {props.event.eventDate}</li>
+                        <li>Event Description:{props.event.eventDescription}</li>
+                    </ul>
+                    <p>Date: {props.event.eventDate}</p>
+                    <button className="remove-btn" onClick={() => props.remove(props.eventKey)}><i className="far fa-times-circle"></i></button> 
+                </div>
+
         </React.Fragment>
     )
 }
 
+// export default EventsPage;
 export default EventsPage;
