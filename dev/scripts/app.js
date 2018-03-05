@@ -50,15 +50,22 @@ class Brent extends React.Component {
     })
       .then(({ data }) => {
         console.log(data);
+        const array = data.drinks;
+        const newNewArray = [];
+        const newArray = array.map((id)=>{
+          newNewArray.push(id.idDrink);
+        })
         this.setState({
           // this drinks list is an array of objects wiht ALL the properties we need
-          drinksList: data.drinks
+          byNameQ: '',
+          drinksListCompiled: array,
+          searchID: newNewArray
         })
       })
 
-    this.setState({
-      byNameQ: ''
-    })
+    // this.setState({
+    //   byNameQ: ''
+    // })
   }
 
   // search by ingredient
@@ -256,10 +263,11 @@ class Thi extends React.Component {
         params: {
           access_key: config.apiKey,
           product_id: this.state.productID,
-          geo: this.state.address// add in location
+          geo: this.state.address,
+          // order: id.asc // add in location
         }
       }).then(({ data }) => {
-        const lcbo = data.result[0].address_line_1;
+        const lcbo = data.result.address_line_1;
         console.log(data.result);
 
         this.setState({
