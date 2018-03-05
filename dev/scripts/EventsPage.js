@@ -102,7 +102,7 @@ class EventsPage extends React.Component {
                         )
                     })}
                 {/* </Link> */}
-            // </React.Fragment>
+            </React.Fragment>
         )
     }
 }
@@ -126,5 +126,6 @@ const EventCard = (props) => {
     )
 }
 
-// export default EventsPage;
 export default EventsPage;
+// export {EventsPage, EventCard};
+// export EventCard;

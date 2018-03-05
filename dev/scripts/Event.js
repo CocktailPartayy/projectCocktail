@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import {EventsPage, EventCard} from './Eventspage'
 
 // initialize firebase
 // var config = {
@@ -26,17 +27,29 @@ export default class Event extends React.Component {
     //     // console.log(this.state.url);
     // }
 
-    // componentDidMount(){
-    //     const dbRef = firebase.database().ref(``)
-    //     const userId = firebase.auth().currentUser.uid;
-    //     const dbRef = firebase.database().ref(`/users/${userId}/${this.state.url}`);
-    //     dbRef.on('value', (snapshot)=> {
-    //         console.log(snapshot);
-    //     })
-    // }
+    componentDidMount(){
+        // const dbRef = firebase.database().ref(``)
+        // dbref = firebase.database().ref(``)
+        console.log(firebase.auth().currentUser.uid)
+        // const userId = firebase.auth().currentUser.uid;
+        // const dbRef = firebase.database().ref(`/users/${userId}/${this.state.url}`);
+        // dbRef.on('value', (snapshot)=> {
+        //     console.log(snapshot);
+        // })
+    }
+
+    // const dbRef = firebase.database().ref(`/users/${user.uid}/events`);
+    // dbRef.on('value', (data) => {
+    //     const eventsArray = [];
+    //     const eventdata = data.val();
 
     render(){
-        return <div>hi</div>
+        return (
+            <Fragment>
+                {/* <EventCard /> */}
+        <div>hi</div>
+        </Fragment>
+        )
     }
 
 }
