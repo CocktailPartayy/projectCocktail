@@ -143,7 +143,12 @@ class App extends React.Component {
 
               {/* <Search /> */}
               {/* <Event /> */}
+              <Route path='/search' exact component={Search} />
+              <Route path='/search/:searchId' exact component={Drink} />
 
+              <Route path='/events' exact component={EventsPage} />
+              {/* <Route path='/events/:eventsId' exact component={Event} /> */}
+              <Route path='/events/:eventsId' exact render={(props) => <Event {...this.state} {...props} />} />
               {/* <Brent events={this.state.events} /> */}
               
                 {/* <Route  path='/'  exact component={Home} /> */}
@@ -175,7 +180,19 @@ class App extends React.Component {
 
           }
 
-          
+          {/* <Fragment> */}
+            {/* <Route  path='/'  exact component={Home} /> */}
+            {/* <Route path='/drink/:drinkID' component={Drink} /> */}
+           
+            {/* <Route path='/:searchId/:eventsId' exact render={(props) => <Drink {...this.state} {...props} />} /> */}
+            
+
+
+
+            {/* <Route path='/events/:eventsId' exact render={(props) => ( */}
+            {/* <EventCard  {...props }/>)}  />  */}
+            {/* <Route path='/events/:eventsID' params={{ name: props.eventName.eventName }} component={EventCard} /> */}
+          {/* </Fragment> */}
 
         </Fragment>
       </BrowserRouter>
