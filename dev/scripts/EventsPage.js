@@ -54,23 +54,20 @@ class EventsPage extends React.Component {
             eventDescription: this.state.eventDescription
         }
 
-        // const userId = firebase.auth().currentUser.uid;
-        // const dbRef = firebase.database().ref(`users/${userId}/events`)
-        // const dbRefz = firebase.database().ref(`/events`)
-        // dbRef.push(events);
-        // dbRefz.push(events);        
-        
         const userId = firebase.auth().currentUser.uid;
         const dbRef = firebase.database().ref(`users/${userId}/events`)
         dbRef.push(events)
-            .then((data) => {
-                const dbRefE = firebase.database().ref(`/events/${data.ref.key}`)
-                // console.log(data.ref.key);
-                dbRefE.update(events);
-            }) 
-            // { name: `${this.state.user.displayName}`
+        .then((data)=>{
+            const dbRefE = firebase.database().ref(`/events/${data.ref.key}`)
+            console.log(dbRefE);
+            dbRefE.update(events);
+        })
+        console.log('hey')
 
-
+        
+        // "/events/-L6s5-eSMUkKv9wDjViM" THIS IS THE URL WHEN CECE IS SIGNED IN AND GOES TO A LINK THAT BRENT MADE
+        //"/events/-L6s5-eSMUkKv9wDjViM"
+    
         this.setState({
             eventDate: '',
             eventDescription: '',
@@ -118,7 +115,7 @@ class EventsPage extends React.Component {
                         )
                     })}
                 {/* </Link> */}
-             </React.Fragment>
+            </React.Fragment>
         )
     }
 }
@@ -142,5 +139,6 @@ const EventCard = (props) => {
     )
 }
 
-// export default EventsPage;
 export default EventsPage;
+// export {EventsPage, EventCard};
+// export EventCard;

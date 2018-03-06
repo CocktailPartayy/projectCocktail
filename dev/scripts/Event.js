@@ -1,53 +1,49 @@
 import React, { Fragment } from 'react';
+import {EventsPage, EventCard} from './Eventspage'
 
-// initialize firebase
-// var config = {
-//     apiKey: "AIzaSyAKuFRAm4lX_T_9PitdDB7dZHyzDKDMyk8",
-//     authDomain: "cocktail-party-28499.firebaseapp.com",
-//     databaseURL: "https://cocktail-party-28499.firebaseio.com",
-//     projectId: "cocktail-party-28499",
-//     storageBucket: "",
-//     messagingSenderId: "882276644580"
-// };
-// firebase.initializeApp(config);
 
 export default class Event extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             url: '',
             userId: '',
             eName: '',
             eDate: '',
             eDesc: '',
-            users: []
+            guests: []
         };
         // this.handleClick = this.handleClick.bind(this);
+        this.addUser = this.addUser.bind(this);
     }
     componentDidMount(){
-    //    console.log(this.state.url)
+        
         // const dbRef = firebase.database().ref(``)
         // const userId = firebase.auth().currentUser.uid;
-        // const dbRef = firebase.database().ref(`/users/${this.state.userId}${this.state.url}`);
-        // const dbRef = firebase.database().ref('/events/-L6s7YhY9RHRNQQO6CTQ');
-        const dbRef = firebase.database().ref(this.state.url);
-        
-        
-
+        const dbRef = firebase.database().ref(`${this.state.url}`);
         dbRef.on('value', (snapshot) => {
             console.log(snapshot.val());
-            // const e = snapshot.val()
-            // this.setState({
-            //     eName: e.eventName,
-            //     eDate: e.eventDate,
-            //     eDesc: e.eventDescription
-            // })
+            const e = snapshot.val();
+            console.log(snapshot.val().guests);
+            
+            this.setState({
+                eName: e.eventName,
+                eDate: e.eventDate,
+                eDesc: e.eventDescription,
+                // guests : snapshot.val().guests
+            })
+
+            if(snapshot.val().guests){
+                this.setState({
+                guests: snapshot.val().guests 
+                })
+            }
         })
 
         // dbRefE = firebase.database().ref(`/${this.state.url}`)
         
         
-    //    console.log(this.props)
+        //    console.log(this.props)
     }
     
     componentWillMount() {
@@ -55,6 +51,24 @@ export default class Event extends React.Component {
             url: this.props.match.url,
             // userId: this.props.user.uid
         });
+    }
+    
+    addUser(e) {
+        e.preventDefault();
+        const guestID = this.props.user.displayName;
+        console.log(guestID);
+        let guestsNew = this.state.guests.slice();
+        guestsNew.push(guestID);
+        
+
+        this.setState({
+            guests: guestsNew
+        })
+        const dbRef = firebase.database().ref(`${this.state.url}/guests`);
+        dbRef.set(guestsNew);
+        console.log(guestsNew)
+        
+
     }
     
     
@@ -88,6 +102,7 @@ export default class Event extends React.Component {
                 <h2>{this.state.eName}</h2>
                 <p>{this.state.eDate}</p>
                 <p>{this.state.eDesc}</p>
+                <button onClick={this.addUser}>Join the thing!</button>
            </Fragment>
         )
     }
