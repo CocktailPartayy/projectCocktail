@@ -59,6 +59,7 @@ export default class Search extends React.Component {
     }
     
     render() {
+        console.log('searrr')
         return (
             <Fragment>
                 <form onSubmit={this.getDrinksList}>
@@ -72,9 +73,9 @@ export default class Search extends React.Component {
                     <button>submit</button>    
                 </form>  
 
-                {this.state.drinksList.map(drink=> {
+                {this.state.drinksList ? this.state.drinksList.map(drink=> {
                    return <DrinkList drinks={drink} key={drink.idDrink} drinksList={this.state.drinksList} events={this.props.events}/>
-                })}
+                }): null}
             </Fragment>
         ) 
     }
