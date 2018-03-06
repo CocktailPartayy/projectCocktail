@@ -64,8 +64,8 @@ export default class Drink extends React.Component {
                 {this.state.drinkIng.map(ing=>{
                     return (
                         <li key={`${this.state.id}-${ing}`}>
-                                <p>{ing}</p>
-                                <DrinkLocations ingredient={ing} />
+                            <p>{ing}</p>
+                            <DrinkLocations ingredient={ing} />
                         </li>
                     )
                 })}

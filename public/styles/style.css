@@ -131,7 +131,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
-.showLocationInput, .recipe-card, .addCocktail {
+.showLocationInput, .recipe-card, .addToEvents {
   opacity: 0;
   display: none; }
 

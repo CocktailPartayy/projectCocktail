@@ -131,7 +131,7 @@ class App extends React.Component {
 
       <BrowserRouter>
         <Fragment>
-          {this.state.loggedIn ?
+          {/* {this.state.loggedIn ? */}
             <Fragment>
               {/* <Brent /> */}
               <Link to={`/`}>Home</Link>
@@ -159,21 +159,26 @@ class App extends React.Component {
               </Fragment>
 
 
-            :
+            
 
-            <div className="sign-in">
+            {/* <div className="sign-in">
               <div><img className='animated tada infinite' src='../../assets/signin-bkg.png' alt="" /></div>
               <div>
-                {/* <h1>Cocktail Partayyy</h1> */}
                 <button onClick={this.signIn}>sign in!</button>
               </div>
-            </div>
+            </div> */}
 
-          }
+          
 
           {/* <Fragment> */}
             {/* <Route  path='/'  exact component={Home} /> */}
             {/* <Route path='/drink/:drinkID' component={Drink} /> */}
+            <Route path='/search' exact render={(props) => <Search {...this.state} {...props} />} />
+            <Route path='/search/:searchId' exact component={Drink} />
+
+            <Route path='/events' exact component={EventsPage} />
+            {/* <Route path='/events/:eventsId' exact component={Event} /> */}
+            <Route path='/events/:eventsId' exact render={(props) => <Event {...this.state} {...props} />} />
            
             {/* <Route path='/:searchId/:eventsId' exact render={(props) => <Drink {...this.state} {...props} />} /> */}
             

@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
 // import ReactDOM from 'react-dom';
+import React, { Fragment } from 'react';
 import Drink from './Drink'
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
@@ -14,6 +14,8 @@ export default class DrinkList extends React.Component {
             ingredients: [],
             instructions: ''
         };
+        this.addToEvent = this.addToEvent.bind(this);
+        this.addDrink = this.addDrink.bind(this);
     }
 
     componentDidMount() {
@@ -32,16 +34,50 @@ export default class DrinkList extends React.Component {
                      ingredients: drinkIngredient
                  })
             }   
-
         }
+
+        const userId = firebase.auth().currentUser.uid;
+        const dbRefz = firebase.database().ref(`/users/${userId}`);
+        const dbRef = firebase.database().ref(`/users/${userId}/events/`);
+        dbRefz.on('value', (snapshot) => {
+            const data = snapshot.val().events
+            const eventId = [];
+            for (let key in data) {
+                data[key].key = key;
+                eventId.push(data[key].key);
+            }
+            this.setState({
+                eId: eventId
+            })
+        })
+    }
+
+    addToEvent() {
+        this.addToEvents.classList.toggle("show");    
+    }
+
+    addDrink(eventKey) {
+        const userId = firebase.auth().currentUser.uid;
+        const dbRef = firebase.database().ref(`/users/${userId}/events/${eventKey}/recipes`);
+        dbRef.push(this.props.drinks);
     }
 
     render() {
         return (
            <Fragment>
-                <Link to={`/search/${this.props.drinks.idDrink}`}>
-                    <DrinkThumb drinkName={this.props.drinks.strDrink} drinkPic={this.props.drinks.strDrinkThumb} key={`DrinkThumb-${this.props.drinks.idDrink}`} />
-                </Link>
+               <div className="drinkPreview">
+                    <button onClick={this.addToEvent}>Add me</button>
+                    <div>
+                        <ul className="addToEvents" ref={ref => this.addToEvents = ref}>
+                        {this.props.events.map((event, key)=> {
+                                return <li key={event.key}>{event.eventName} <button onClick={() => this.addDrink(event.key)}>Add drink</button></li>
+                        })}
+                        </ul>
+                    </div>
+                    <Link to={`/search/${this.props.drinks.idDrink}`}>
+                        <DrinkThumb drinkName={this.props.drinks.strDrink} drinkPic={this.props.drinks.strDrinkThumb} key={`DrinkThumb-${this.props.drinks.idDrink}`}/>
+                    </Link>
+               </div>
            </Fragment>
         )
     }

@@ -74,7 +74,7 @@ export default class Search extends React.Component {
                 </form>  
 
                 {this.state.drinksList.map(drink=> {
-                   return <DrinkList drinks={drink} key={drink.idDrink} drinksList={this.state.drinksList} />
+                   return <DrinkList drinks={drink} key={drink.idDrink} drinksList={this.state.drinksList} events={this.props.events}/>
                 })}
             </Fragment>
         ) 

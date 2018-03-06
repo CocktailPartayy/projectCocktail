@@ -1,20 +1,10 @@
 import React, { Fragment } from 'react';
 import {EventsPage, EventCard} from './Eventspage'
 
-// initialize firebase
-// var config = {
-//     apiKey: "AIzaSyAKuFRAm4lX_T_9PitdDB7dZHyzDKDMyk8",
-//     authDomain: "cocktail-party-28499.firebaseapp.com",
-//     databaseURL: "https://cocktail-party-28499.firebaseio.com",
-//     projectId: "cocktail-party-28499",
-//     storageBucket: "",
-//     messagingSenderId: "882276644580"
-// };
-// firebase.initializeApp(config);
 
 export default class Event extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             url: '',
             userId: '',
