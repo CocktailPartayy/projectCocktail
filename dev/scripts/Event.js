@@ -56,7 +56,7 @@ export default class Event extends React.Component {
     componentWillMount() {
         this.setState({
             url: this.props.match.url,
-            userId: this.props.user.uid
+            // userId: this.props.user.uid
         });
     }
     
