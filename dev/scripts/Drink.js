@@ -18,16 +18,14 @@ export default class Drink extends React.Component {
         }
     }
 
+    // set the id of what was passed from our route
     componentWillMount() {
         this.setState({
             id: this.props.match.params.searchId
         });
     }
     componentDidMount() {
-        // this.setState({
-        //     drinksList: this.props.drinksList
-        // })
-        
+        // use the id to call from our cocktail api and rerender the information we need
         axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${this.state.id}`, {
         }).then(({data} ) => {
             // console.log(data.drinks[0]);
@@ -38,6 +36,7 @@ export default class Drink extends React.Component {
                 drinkPic: drinkDetails.strDrinkThumb,
                 drinkIns: drinkDetails.strInstructions
             })
+            // use the same regex medthod to render only ingredients with a value
             for (let property in drinkDetails) {
                 if (/Ingredient/.test(property)) {
                     if (drinkDetails[property]) {
@@ -56,11 +55,12 @@ export default class Drink extends React.Component {
     render(){
         return (
            <div>
-            {/* <Link to={`/search`}>Search</Link> */}
+            <Link to={`/search`}>Search</Link>
             <h2>{this.state.drinkName}</h2>
             <img src={this.state.drinkPic} alt=""/>
             <p>{this.state.drinkIns}</p>
             <ul>
+                {/* this will no longer be needed, replace with input that will do another axios call to the LCBO api to render to 3 locations near you */}
                 {this.state.drinkIng.map(ing=>{
                     return (
                         <li key={`${this.state.id}-${ing}`}>

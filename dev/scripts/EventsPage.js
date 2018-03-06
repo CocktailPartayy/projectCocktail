@@ -1,9 +1,9 @@
-import React from 'react'; 
+import React, { Fragment } from 'react'; 
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import Event from './Event';
 
 
-
+// renders a list of events the user has created
 class EventsPage extends React.Component {
     constructor() {
         super();
@@ -19,35 +19,40 @@ class EventsPage extends React.Component {
         this.addEvent = this.addEvent.bind(this);
         this.removeEvent = this.removeEvent.bind(this);
     }
+
     componentDidMount() {
         firebase.auth().onAuthStateChanged((user) => {
+        // if we have a user response then retreive our user specific events from firebase and set as state
         if (user) {
             const dbRef = firebase.database().ref(`/users/${user.uid}/events`);
             dbRef.on('value', (data) => {
             const eventsArray = [];
             const eventdata = data.val();
-        
+            // use a for in loop to also use the key returned from firebase and add it as a property on individual event objects
             for (let eventKey in eventdata) {
                 eventdata[eventKey].key = eventKey;
+                // push the whole thing into an array and set as events array state
                 eventsArray.push(eventdata[eventKey])
             }
-            // console.log(eventsArray)
             this.setState({
                 events: eventsArray
-            });
-            });
-        } 
+                    });
+                });
+            } 
         });
     }
 
+    // set state based on user input
     handleChange(e) {
         this.setState({
             [e.target.id]: e.target.value
         });
     }
 
+    // method passed when we submit the form
     addEvent(e) {
         e.preventDefault();
+        // compile our event input information into an object
         const events = {
             eventName: this.state.eventName,
             eventDate: this.state.eventDate,
@@ -56,18 +61,14 @@ class EventsPage extends React.Component {
 
         const userId = firebase.auth().currentUser.uid;
         const dbRef = firebase.database().ref(`users/${userId}/events`)
+        // push to our user specific event path
         dbRef.push(events)
+        // AT THE SAME TIME, .push returns a promise including the key firebase has so we took that exact key and UPDATED our event onto the public events path
         .then((data)=>{
             const dbRefE = firebase.database().ref(`/events/${data.ref.key}`)
             console.log(dbRefE);
             dbRefE.update(events);
         })
-        console.log('hey')
-
-        
-        // "/events/-L6s5-eSMUkKv9wDjViM" THIS IS THE URL WHEN CECE IS SIGNED IN AND GOES TO A LINK THAT BRENT MADE
-        //"/events/-L6s5-eSMUkKv9wDjViM"
-    
         this.setState({
             eventDate: '',
             eventDescription: '',
@@ -75,6 +76,7 @@ class EventsPage extends React.Component {
         })
     }
 
+    // used to remove event pass in event key as argumennt, just kinda removes it from firebase and since our evennt page is rendered from what we grab on firebase it will update
     removeEvent(eventKey) {
         const userId = firebase.auth().currentUser.uid;
         const dbRef = firebase.database().ref(`/users/${userId}/events/${eventKey}`);
@@ -84,9 +86,6 @@ class EventsPage extends React.Component {
     render() {
         return (
             <React.Fragment>
-                {/* <Link to={`/`}>Home</Link>
-                <Link to={`/events`}>Events</Link>
-                <Link to={`/search`}>Search</Link> */}
                 <form onSubmit={this.addEvent}>
                     <h2>Let's Create An Event</h2>
                     <label htmlFor="eventName">Event Name:</label>
@@ -99,27 +98,24 @@ class EventsPage extends React.Component {
                     <textarea name="eventDescription" value={this.state.eventDescription} id="eventDescription" cols="10" rows="5" onChange={this.handleChange} placeholder="Details"></textarea>
                     <input type="submit" value="Add Event"/>
                 </form>
-                {/* <Event /> */}
-                {/* <div>
-                    {this.state.events.map((event, key) => {
-                        return event.eventName
-                    })}
-                </div> */}
 
-                {/* <Link to={`/events/${this.props.eventKey}`}> */}
+                {/* takes the events array returned from firebase and map it and show each event card onn click of the button the removeEvent method will take the eventkey and remove from firebase, thus our event page*/}
                     {this.state.events.map((event, key) => {
                         return (
-                            <Link to={`/events/${event.key}`} key={event.key}>
-                                <EventCard key={event.key} event={event} remove={this.removeEvent}  />
-                            </Link>
+                            <div key={event.key}>
+                                <Link to={`/events/${event.key}`} key={event.key}>
+                                    <EventCard key={event.key} event={event}  />
+                                </Link>
+                                <button className="remove-btn" onClick={() => this.removeEvent(event.key)}><i className="far fa-times-circle"></i></button> 
+                            </div>
                         )
                     })}
-                {/* </Link> */}
             </React.Fragment>
         )
     }
 }
 
+// render each event, passed down the event state (pulled from firebase directly , includes event info and recipes list) from events page
 class EventCard extends React.Component {
     constructor() {
         super();
@@ -128,6 +124,7 @@ class EventCard extends React.Component {
         }
     }
     componentDidMount() {
+        // putting our recipes in an array and setting state
         const recipeArray = [];
         const data = this.props.event.recipes;
         for (let key in data) {
@@ -140,8 +137,6 @@ class EventCard extends React.Component {
     render() {
         return (
             <React.Fragment>
-                {/* {console.log(props)} */}
-                {/* <Link to={`/events/event${props.eventKey}`} params={{name: props.event.eventName}}>stuff</Link> */}
                     <div>
                         <p>{this.props.event.eventName}</p>
                         <ul>
@@ -149,6 +144,7 @@ class EventCard extends React.Component {
                             <li>Event Description:{this.props.event.eventDescription}</li>
                             <li>Drinks:
                                 <ul>
+                                    {/* mapping over state annd rendering the drinks we have added */}
                                     {this.state.recipes.map((recipe, key) => {
                                         return <li key={key}>{recipe.strDrink}</li>
                                     })}
@@ -157,7 +153,7 @@ class EventCard extends React.Component {
                         </ul>
                         <p>Date: {this.props.event.eventDate}</p>
                            
-                        <button className="remove-btn" onClick={() => this.props.remove(this.props.eventKey)}><i className="far fa-times-circle"></i></button> 
+                        
                     </div>
     
             </React.Fragment>

@@ -12,7 +12,11 @@ in the actual drink component, search id is passed as a property in params, in u
 
 
 left to do:
-    - change our LCBO api call thing
-    - get rid of duplicates in array
+    - change our LCBO api call thing (checked by Brent)
+    - get rid of duplicates in array 
     - find out how to route to a certain component upon sign not (donnt remember the last component we were on)
     - when i typed hey in the search input the whole thing crashed cuz cannot read map of null, remember to set a ternary on that
+    - add an add me button to the Drink component
+    - add in the ingredients with a value onto the Event page
+    - return things in alphabetical order?
+    - add guest array into user/event/guest

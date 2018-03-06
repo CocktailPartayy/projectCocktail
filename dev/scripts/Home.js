@@ -11,9 +11,6 @@ import EventsPage from './EventsPage'
 import Event from './Event'
 // import EventsPage from './EventsPage'
 
-
-
-
 class Home extends React.Component {
     constructor() {
         super();
@@ -85,24 +82,23 @@ class Home extends React.Component {
     render() {
         return (
             
-            <BrowserRouter>
             <Fragment>
                 {this.state.loggedIn ?
-                    <Fragment>
-                        {/* <Brent /> */}
-                        <Link to={`/`}>Home</Link>
-                        <Link to={`/events`}>Events</Link>
-                        <Link to={`/search`}>Search</Link>
-                        <button onClick={this.signOut}>sign out</button>
-                        {/* <button onClick={this.retrieveEvent}>get my shit</button> */}
-                        {/* what i wanna do is  <Search /> <Events /> <Favs /> */}
+                       <Fragment>
+                            {/* <Brent /> */}
+                            {/* <Link to={`/`}>Home</Link>
+                            <Link to={`/events`}>Events</Link>
+                            <Link to={`/search`}>Search</Link> */}
+                            {/* <button onClick={this.signOut}>sign out</button> */}
+                            {/* <button onClick={this.retrieveEvent}>get my shit</button> */}
+                            {/* what i wanna do is  <Search /> <Events /> <Favs /> */}
+                            <h1>hi</h1>
+                            {/* <Search /> */}
+                            {/* <Event /> */}
+                            
+                            {/* <Brent events={this.state.events} /> */}
+                       </Fragment>
 
-                        {/* <Search /> */}
-                        {/* <Event /> */}
-                        
-                        {/* <Brent events={this.state.events} /> */}
-
-                    </Fragment>
 
 
                     :
@@ -116,26 +112,7 @@ class Home extends React.Component {
                     </div>
 
                 }
-
-                    <Fragment>
-                        {/* <Route  path='/'  exact component={Home} /> */}
-                        {/* <Route path='/drink/:drinkID' component={Drink} /> */}
-                        <Route path='/search' exact component={Search} />
-                        <Route path='/search/:searchId' exact component={Drink} />
-
-                        <Route path='/events' exact component={EventsPage} />
-                        {/* <Route path='/events/:eventsId' exact component={Event} /> */}
-                        <Route path='/events/:eventsId'  exact render={(props)=><Event {...this.state} {...props} />} />
-                        
-
-
-                        {/* <Route path='/events/:eventsId' exact render={(props) => ( */}
-                        {/* <EventCard  {...props }/>)}  />  */}
-                        {/* <Route path='/events/:eventsID' params={{ name: props.eventName.eventName }} component={EventCard} /> */}
-                    </Fragment>
-
             </Fragment>
-                </BrowserRouter>
         )
     }
 }

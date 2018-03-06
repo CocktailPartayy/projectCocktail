@@ -8,6 +8,7 @@ import Search from './Search'
 import Drink from './Drink'
 import EventsPage from './EventsPage'
 import Event from './Event'
+import Home from './Home'
 
 
 
@@ -118,6 +119,7 @@ class App extends React.Component {
               
                 <button onClick={this.signOut}>sign out</button>
                 {/* we passed this.state and props down this.state refers to app and props refers to the props route itself has like history, match etc */}
+                <Route path='/' exact component={Home} />
                 <Route path='/search' exact render={(props) => <Search {...this.state} {...props} />} />
                 <Route path='/search/:searchId' exact component={Drink} />
                 <Route path='/events' exact component={EventsPage} />
