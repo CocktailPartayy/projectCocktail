@@ -151,7 +151,12 @@ class App extends React.Component {
               <Route path='/events/:eventsId' exact render={(props) => <Event {...this.state} {...props} />} />
               {/* <Brent events={this.state.events} /> */}
 
-            </Fragment>
+
+
+                {/* <Route path='/events/:eventsId' exact render={(props) => ( */}
+                {/* <EventCard  {...props }/>)}  />  */}
+                {/* <Route path='/events/:eventsID' params={{ name: props.eventName.eventName }} component={EventCard} /> */}
+              </Fragment>
 
 
             :

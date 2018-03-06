@@ -56,8 +56,18 @@ class EventsPage extends React.Component {
 
         const userId = firebase.auth().currentUser.uid;
         const dbRef = firebase.database().ref(`users/${userId}/events`)
-        dbRef.push(events);
+        dbRef.push(events)
+        .then((data)=>{
+            const dbRefE = firebase.database().ref(`/events/${data.ref.key}`)
+            console.log(dbRefE);
+            dbRefE.update(events);
+        })
+        console.log('hey')
 
+        
+        // "/events/-L6s5-eSMUkKv9wDjViM" THIS IS THE URL WHEN CECE IS SIGNED IN AND GOES TO A LINK THAT BRENT MADE
+        //"/events/-L6s5-eSMUkKv9wDjViM"
+    
         this.setState({
             eventDate: '',
             eventDescription: '',
@@ -105,7 +115,7 @@ class EventsPage extends React.Component {
                         )
                     })}
                 {/* </Link> */}
-            // </React.Fragment>
+            </React.Fragment>
         )
     }
 }
@@ -129,5 +139,6 @@ const EventCard = (props) => {
     )
 }
 
-// export default EventsPage;
 export default EventsPage;
+// export {EventsPage, EventCard};
+// export EventCard;
