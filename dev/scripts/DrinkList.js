@@ -12,7 +12,8 @@ export default class DrinkList extends React.Component {
         super();
         this.state = {
             ingredients: [],
-            instructions: ''
+            instructions: '',
+            recipes: []
         };
         this.addToEvent = this.addToEvent.bind(this);
         this.addDrink = this.addDrink.bind(this);
@@ -59,9 +60,13 @@ export default class DrinkList extends React.Component {
     addDrink(eventKey) {
         const userId = firebase.auth().currentUser.uid;
         const dbRef = firebase.database().ref(`/users/${userId}/events/${eventKey}/recipes`);
-        dbRef.push(this.props.drinks);
+        dbRef.push(this.props.drinks)
+        .then((data) => {
+            const dbRefE = firebase.database().ref(`/events/${eventKey}/recipes`)
+            console.log(dbRefE);
+            dbRefE.push(this.props.drinks);
+})
     }
-
     render() {
         return (
            <Fragment>
