@@ -7,3 +7,4 @@ api.js
 Router.js
 EventsPage.js
 Home.js
+.DS_Store

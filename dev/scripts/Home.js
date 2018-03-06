@@ -11,9 +11,6 @@ import EventsPage from './EventsPage'
 import Event from './Event'
 // import EventsPage from './EventsPage'
 
-
-
-
 class Home extends React.Component {
     constructor() {
         super();
@@ -102,13 +99,8 @@ class Home extends React.Component {
                         </div>
                         {/* <button onClick={this.retrieveEvent}>get my shit</button> */}
                         {/* what i wanna do is  <Search /> <Events /> <Favs /> */}
+                        </Fragment>
 
-                        {/* <Search /> */}
-                        {/* <Event /> */}
-                        
-                        {/* <Brent events={this.state.events} /> */}
-
-                    </Fragment>
 
 
                     :
