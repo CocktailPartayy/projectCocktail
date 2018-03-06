@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import {EventsPage, EventCard} from './Eventspage'
 
 
 export default class Event extends React.Component {
@@ -6,20 +7,67 @@ export default class Event extends React.Component {
         super(props);
         this.state={
             url: '',
-            userId: ''
+            userId: '',
+            eName: '',
+            eDate: '',
+            eDesc: '',
+            guests: []
         };
         // this.handleClick = this.handleClick.bind(this);
+        this.addUser = this.addUser.bind(this);
     }
     componentDidMount(){
-        // console.log(this);
+        
+        // const dbRef = firebase.database().ref(``)
         // const userId = firebase.auth().currentUser.uid;
-        // console.log(userId);
-        // this.setState({
-        //     url: this.props.match.url
-        //     // userId
-        // })
-    //     // console.log(this.state.url);
+        const dbRef = firebase.database().ref(`${this.state.url}`);
+        dbRef.on('value', (snapshot) => {
+            console.log(snapshot.val());
+            const e = snapshot.val();
+            console.log(snapshot.val().guests);
+            
+            this.setState({
+                eName: e.eventName,
+                eDate: e.eventDate,
+                eDesc: e.eventDescription,
+                // guests : snapshot.val().guests
+            })
+
+            if(snapshot.val().guests){
+                this.setState({
+                guests: snapshot.val().guests 
+                })
+            }
+        })
+        
+        //    console.log(this.props)
     }
+    
+    componentWillMount() {
+        this.setState({
+            url: this.props.match.url,
+            userId: this.props.user.uid
+        });
+    }
+    
+    addUser(e) {
+        e.preventDefault();
+        const guestID = this.props.user.displayName;
+        console.log(guestID);
+        let guestsNew = this.state.guests.slice();
+        guestsNew.push(guestID);
+        
+
+        this.setState({
+            guests: guestsNew
+        })
+        const dbRef = firebase.database().ref(`${this.state.url}/guests`);
+        dbRef.set(guestsNew);
+        console.log(guestsNew)
+        
+
+    }
+    
     
     // componentWillUpdate (){
     //     // const userId = firebase.auth().currentUser.uid;
@@ -41,18 +89,19 @@ export default class Event extends React.Component {
         // })
         // console.log(this.state.userId);
 
-        // const dbRef = firebase.database().ref(``)
-        // const userId = firebase.auth().currentUser.uid;
-
-        // const dbRef = firebase.database().ref(`/users/${this.state.userId}${this.state.url}`);
-        // dbRef.on('value', (snapshot) => {
-        //     console.log(snapshot);
-        // })
+        // 
         
     // }
 
     render(){
-        return <button onClick={this.handleClick}>get my shit</button>
+        return (
+           <Fragment>
+                <h2>{this.state.eName}</h2>
+                <p>{this.state.eDate}</p>
+                <p>{this.state.eDesc}</p>
+                <button onClick={this.addUser}>Join the thing!</button>
+           </Fragment>
+        )
     }
 
 }

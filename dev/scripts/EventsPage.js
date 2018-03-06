@@ -12,6 +12,8 @@ class EventsPage extends React.Component {
             eventName: '',
             eventDate: '',
             eventDescription: ''
+            // users: []
+
         }
         this.handleChange = this.handleChange.bind(this);
         this.addEvent = this.addEvent.bind(this);
@@ -54,8 +56,18 @@ class EventsPage extends React.Component {
 
         const userId = firebase.auth().currentUser.uid;
         const dbRef = firebase.database().ref(`users/${userId}/events`)
-        dbRef.push(events);
+        dbRef.push(events)
+        .then((data)=>{
+            const dbRefE = firebase.database().ref(`/events/${data.ref.key}`)
+            console.log(dbRefE);
+            dbRefE.update(events);
+        })
+        console.log('hey')
 
+        
+        // "/events/-L6s5-eSMUkKv9wDjViM" THIS IS THE URL WHEN CECE IS SIGNED IN AND GOES TO A LINK THAT BRENT MADE
+        //"/events/-L6s5-eSMUkKv9wDjViM"
+    
         this.setState({
             eventDate: '',
             eventDescription: '',
@@ -97,16 +109,13 @@ class EventsPage extends React.Component {
                 {/* <Link to={`/events/${this.props.eventKey}`}> */}
                     {this.state.events.map((event, key) => {
                         return (
-                            <div>
-                                <button className="remove-btn" onClick={() => this.removeEvent(event.key)}><i className="far fa-times-circle"></i></button> 
-                                <Link to={`/events/${event.key}`} key={event.key}>
-                                    <EventCard key={event.key} event={event} remove={this.removeEvent} />
-                                </Link>
-                            </div>
+                            <Link to={`/events/${event.key}`} key={event.key}>
+                                <EventCard key={event.key} event={event} remove={this.removeEvent} />
+                            </Link>
                         )
                     })}
                 {/* </Link> */}
-            // </React.Fragment>
+            </React.Fragment>
         )
     }
 }
@@ -123,11 +132,13 @@ const EventCard = (props) => {
                         <li>Event Description:{props.event.eventDescription}</li>
                     </ul>
                     <p>Date: {props.event.eventDate}</p>
+                    <button className="remove-btn" onClick={() => props.remove(props.eventKey)}><i className="far fa-times-circle"></i></button> 
                 </div>
 
         </React.Fragment>
     )
 }
 
-// export default EventsPage;
 export default EventsPage;
+// export {EventsPage, EventCard};
+// export EventCard;
