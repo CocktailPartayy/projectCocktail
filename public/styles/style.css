@@ -131,14 +131,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
-<<<<<<< HEAD
-body {
-  background-color: #2A4F5C; }
-
-.showLocationInput, .recipe-card, .addCocktail {
-=======
 .showLocationInput, .recipe-card, .addToEvents {
->>>>>>> 55e7156176913ad19525697242675542ddcde207
   opacity: 0;
   display: none; }
 

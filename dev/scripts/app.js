@@ -131,13 +131,8 @@ class App extends React.Component {
 
       <BrowserRouter>
         <Fragment>
-<<<<<<< HEAD
-          {this.state.loggedIn ?
-            <div className='home'>
-=======
           {/* {this.state.loggedIn ? */}
             <Fragment>
->>>>>>> 55e7156176913ad19525697242675542ddcde207
               {/* <Brent /> */}
               <div className='home-wrapper clearfix'>
                 <h1>Welcome {this.state.user.displayName}!</h1>
@@ -159,10 +154,6 @@ class App extends React.Component {
               </div>
               {/* <Brent events={this.state.events} /> */}
 
-<<<<<<< HEAD
-            </div>
-=======
->>>>>>> 55e7156176913ad19525697242675542ddcde207
 
 
                 {/* <Route path='/events/:eventsId' exact render={(props) => ( */}
@@ -170,14 +161,10 @@ class App extends React.Component {
                 {/* <Route path='/events/:eventsID' params={{ name: props.eventName.eventName }} component={EventCard} /> */}
               </Fragment>
 
-<<<<<<< HEAD
-            <div className="sign-in-page">
-=======
 
             
 
             {/* <div className="sign-in">
->>>>>>> 55e7156176913ad19525697242675542ddcde207
               <div><img className='animated tada infinite' src='../../assets/signin-bkg.png' alt="" /></div>
               <div>
                 <button onClick={this.signIn}>sign in!</button>
