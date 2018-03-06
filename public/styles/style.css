@@ -131,6 +131,9 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+body {
+  background-color: #2A4F5C; }
+
 .showLocationInput, .recipe-card, .addToEvents {
   opacity: 0;
   display: none; }
