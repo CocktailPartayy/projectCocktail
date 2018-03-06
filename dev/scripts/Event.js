@@ -24,23 +24,33 @@ export default class Event extends React.Component {
             guests: []
         };
         // this.handleClick = this.handleClick.bind(this);
+        this.addUser = this.addUser.bind(this);
     }
     componentDidMount(){
-       
+        
         // const dbRef = firebase.database().ref(``)
         // const userId = firebase.auth().currentUser.uid;
-        const dbRef = firebase.database().ref(`/users/${this.state.userId}${this.state.url}`);
+        const dbRef = firebase.database().ref(`${this.state.url}`);
         dbRef.on('value', (snapshot) => {
             console.log(snapshot.val());
-            const e = snapshot.val()
+            const e = snapshot.val();
+            console.log(snapshot.val().guests);
+            
             this.setState({
                 eName: e.eventName,
                 eDate: e.eventDate,
-                eDesc: e.eventDescription
+                eDesc: e.eventDescription,
+                // guests : snapshot.val().guests
             })
+
+            if(snapshot.val().guests){
+                this.setState({
+                guests: snapshot.val().guests 
+                })
+            }
         })
         
-    //    console.log(this.props)
+        //    console.log(this.props)
     }
     
     componentWillMount() {
@@ -48,6 +58,24 @@ export default class Event extends React.Component {
             url: this.props.match.url,
             userId: this.props.user.uid
         });
+    }
+    
+    addUser(e) {
+        e.preventDefault();
+        const guestID = this.props.user.displayName;
+        console.log(guestID);
+        let guestsNew = this.state.guests.slice();
+        guestsNew.push(guestID);
+        
+
+        this.setState({
+            guests: guestsNew
+        })
+        const dbRef = firebase.database().ref(`${this.state.url}/guests`);
+        dbRef.set(guestsNew);
+        console.log(guestsNew)
+        
+
     }
     
     
@@ -81,6 +109,7 @@ export default class Event extends React.Component {
                 <h2>{this.state.eName}</h2>
                 <p>{this.state.eDate}</p>
                 <p>{this.state.eDesc}</p>
+                <button onClick={this.addUser}>Join the thing!</button>
            </Fragment>
         )
     }

@@ -150,15 +150,6 @@ class App extends React.Component {
               {/* <Route path='/events/:eventsId' exact component={Event} /> */}
               <Route path='/events/:eventsId' exact render={(props) => <Event {...this.state} {...props} />} />
               {/* <Brent events={this.state.events} /> */}
-              
-                {/* <Route  path='/'  exact component={Home} /> */}
-                {/* <Route path='/drink/:drinkID' component={Drink} /> */}
-                <Route path='/search' exact component={Search} />
-                <Route path='/search/:searchId' exact component={Drink} />
-
-                <Route path='/events' exact component={EventsPage} />
-                {/* <Route path='/events/:eventsId' exact component={Event} /> */}
-                <Route path='/events/:eventsId' exact render={(props) => <Event {...this.state} {...props} />} />
 
 
 
