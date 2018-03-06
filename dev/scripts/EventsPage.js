@@ -1,5 +1,7 @@
 import React from 'react'; 
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import Event from './Event';
+
 
 
 class EventsPage extends React.Component {
@@ -10,8 +12,6 @@ class EventsPage extends React.Component {
             eventName: '',
             eventDate: '',
             eventDescription: ''
-            // users: []
-
         }
         this.handleChange = this.handleChange.bind(this);
         this.addEvent = this.addEvent.bind(this);
@@ -59,6 +59,7 @@ class EventsPage extends React.Component {
         this.setState({
             eventDate: '',
             eventDescription: '',
+
         })
     }
 
@@ -71,9 +72,9 @@ class EventsPage extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Link to={`/`}>Home</Link>
+                {/* <Link to={`/`}>Home</Link>
                 <Link to={`/events`}>Events</Link>
-                <Link to={`/search`}>Search</Link>
+                <Link to={`/search`}>Search</Link> */}
                 <form onSubmit={this.addEvent}>
                     <h2>Let's Create An Event</h2>
                     <label htmlFor="eventName">Event Name:</label>
@@ -86,6 +87,7 @@ class EventsPage extends React.Component {
                     <textarea name="eventDescription" value={this.state.eventDescription} id="eventDescription" cols="10" rows="5" onChange={this.handleChange} placeholder="Details"></textarea>
                     <input type="submit" value="Add Event"/>
                 </form>
+                {/* <Event /> */}
                 {/* <div>
                     {this.state.events.map((event, key) => {
                         return event.eventName
@@ -95,9 +97,12 @@ class EventsPage extends React.Component {
                 {/* <Link to={`/events/${this.props.eventKey}`}> */}
                     {this.state.events.map((event, key) => {
                         return (
-                            <Link to={`/events/${event.key}`} key={event.key}>
-                                <EventCard key={event.key} event={event} remove={this.removeEvent} />
-                            </Link>
+                            <div>
+                                <button className="remove-btn" onClick={() => this.removeEvent(event.key)}><i className="far fa-times-circle"></i></button> 
+                                <Link to={`/events/${event.key}`} key={event.key}>
+                                    <EventCard key={event.key} event={event} remove={this.removeEvent} />
+                                </Link>
+                            </div>
                         )
                     })}
                 {/* </Link> */}
@@ -118,7 +123,6 @@ const EventCard = (props) => {
                         <li>Event Description:{props.event.eventDescription}</li>
                     </ul>
                     <p>Date: {props.event.eventDate}</p>
-                    <button className="remove-btn" onClick={() => props.remove(props.eventKey)}><i className="far fa-times-circle"></i></button> 
                 </div>
 
         </React.Fragment>

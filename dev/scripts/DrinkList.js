@@ -12,10 +12,10 @@ export default class DrinkList extends React.Component {
         super();
         this.state = {
             ingredients: [],
-            instructions: '',
-            eventNames: []
+            instructions: ''
         };
         this.addToEvent = this.addToEvent.bind(this);
+        this.addDrink = this.addDrink.bind(this);
     }
 
     componentDidMount() {
@@ -34,42 +34,46 @@ export default class DrinkList extends React.Component {
                      ingredients: drinkIngredient
                  })
             }   
-
         }
+
+        const userId = firebase.auth().currentUser.uid;
+        const dbRefz = firebase.database().ref(`/users/${userId}`);
+        const dbRef = firebase.database().ref(`/users/${userId}/events/`);
+        dbRefz.on('value', (snapshot) => {
+            const data = snapshot.val().events
+            const eventId = [];
+            for (let key in data) {
+                data[key].key = key;
+                eventId.push(data[key].key);
+            }
+            this.setState({
+                eId: eventId
+            })
+        })
     }
 
-    // addDrinktoEvent(eventKey) {
-    //     const userId = firebase.auth().currentUser.uid;
-    //     console.log(userId);
-    //     const dbRef = firebase.database().ref(`/users/${userId}/events/${this.props.eventKey}`);
+    addToEvent() {
+        this.addToEvents.classList.toggle("show");    
+    }
 
-    // }
-
-
-  addToEvent() {
-    // console.log('clicked')
-    const eventList = this.props.events;
-    console.log(this);
-    // const eventNames = []
-    // for(let event in eventList){
-    //   eventNames.push(eventList[event].eventName);
-    // }
-    // console.log(eventNames);
-    // this.setState({
-    //   eventNames
-    // });  
-  }
+    addDrink(eventKey) {
+        const userId = firebase.auth().currentUser.uid;
+        const dbRef = firebase.database().ref(`/users/${userId}/events/${eventKey}/recipes`);
+        dbRef.push(this.props.drinks);
+    }
 
     render() {
         return (
            <Fragment>
                <div className="drinkPreview">
                     <button onClick={this.addToEvent}>Add me</button>
-                    {/* <div className="addCocktail" ref={ref => this.addCocktail = ref}>
-                        {this.state.eventNames.map((event)=> {
-                            return <p>{event}</p>
+                    <div>
+                        <ul className="addToEvents" ref={ref => this.addToEvents = ref}>
+                        {this.props.events.map((event, key)=> {
+                                return <li key={event.key}>{event.eventName} <button onClick={() => this.addDrink(event.key)}>Add drink</button></li>
                         })}
-                    </div> */}
+                        </ul>
+                    </div>
                     <Link to={`/search/${this.props.drinks.idDrink}`}>
                         <DrinkThumb drinkName={this.props.drinks.strDrink} drinkPic={this.props.drinks.strDrinkThumb} key={`DrinkThumb-${this.props.drinks.idDrink}`}/>
                     </Link>

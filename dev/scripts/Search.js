@@ -61,7 +61,7 @@ export default class Search extends React.Component {
     render() {
         return (
             <Fragment>
-                <Link to={'/'}>Home</Link>
+                {/* <Link to={'/'}>Home</Link> */}
                 <form onSubmit={this.getDrinksList}>
                     <label htmlFor="ByName">Search by Name</label>
                     <input type="text" name='name' id='byName' value={this.state.byName} onChange={this.userInput} />
@@ -74,7 +74,7 @@ export default class Search extends React.Component {
                 </form>  
 
                 {this.state.drinksList.map(drink=> {
-                   return <DrinkList drinks={drink} key={drink.idDrink} drinksList={this.state.drinksList} />
+                   return <DrinkList drinks={drink} key={drink.idDrink} drinksList={this.state.drinksList} events={this.props.events}/>
                 })}
             </Fragment>
         ) 
