@@ -8,6 +8,7 @@ import Search from './Search'
 import Drink from './Drink'
 import EventsPage from './EventsPage'
 import Event from './Event'
+import Home from './Home'
 
 
 
@@ -108,23 +109,28 @@ class App extends React.Component {
 
       <BrowserRouter>
         <Fragment>
-            <Fragment>
             {/* ternary operator, if user state logged inn then we only show the signout button, the links and the Routes*/}
             {this.state.loggedIn ? 
-              <div className='home-page'>
-                <Link to={`/`}>Home</Link>
-                <Link to={`/search`}>Search</Link>
-                <Link to={`/events`}>Events</Link>
-              
-                <button onClick={this.signOut}>sign out</button>
-                {/* we passed this.state and props down this.state refers to app and props refers to the props route itself has like history, match etc */}
-                <Route path='/search' exact render={(props) => <Search {...this.state} {...props} />} />
-                <Route path='/search/:searchId' exact component={Drink} />
-                <Route path='/events' exact component={EventsPage} />
-                <Route path='/events/:eventsId' exact render={(props) => <Event {...this.state} {...props} />} />
-              </div>
+              <Fragment>
+                <div className='home-page'>
+                <div className="wrapper">
+                  <h1>Welcome, {`${this.state.user.displayName}`}!</h1>
+                    <Link to={`/`}>Home</Link>
+                    <Link to={`/search`}>Search</Link>
+                    <Link to={`/events`}>Events</Link>
+                  
+                    <button className="signOutButton" onClick={this.signOut}>sign out</button>
+                </div>
+                  {/* we passed this.state and props down this.state refers to app and props refers to the props route itself has like history, match etc */}
+                  <Route path='/' exact component={Home} />
+                  <Route path='/search' exact render={(props) => <Search {...this.state} {...props} />} />
+                  <Route path='/search/:searchId' exact component={Drink} />
+                  <Route path='/events' exact component={EventsPage} />
+                  <Route path='/events/:eventsId' exact render={(props) => <Event {...this.state} {...props} />} />
+                </div>
+              </Fragment>
            
-          : 
+           : 
               
             <div className="sign-in-page">
               {/* if user isnt logged in then show em the amazing sign in page */}
@@ -134,7 +140,7 @@ class App extends React.Component {
               </div>
             </div>
             }
-              </Fragment>
+
         </Fragment>
       </BrowserRouter>
     )

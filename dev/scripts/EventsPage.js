@@ -11,7 +11,8 @@ class EventsPage extends React.Component {
             events: [],
             eventName: '',
             eventDate: '',
-            eventDescription: ''
+            eventDescription: '',
+            eventHost: ''
             // users: []
 
         }
@@ -20,6 +21,7 @@ class EventsPage extends React.Component {
         this.removeEvent = this.removeEvent.bind(this);
     }
     componentDidMount() {
+        const userId = firebase.auth().currentUser.uid;        
         firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             const dbRef = firebase.database().ref(`/users/${user.uid}/events`);
@@ -33,7 +35,8 @@ class EventsPage extends React.Component {
             }
             // console.log(eventsArray)
             this.setState({
-                events: eventsArray
+                events: eventsArray,
+                eventHost: userId
             });
             });
         } 
@@ -42,19 +45,20 @@ class EventsPage extends React.Component {
 
     handleChange(e) {
         this.setState({
-            [e.target.id]: e.target.value
+            [e.target.id]: e.target.value,
         });
     }
 
     addEvent(e) {
+        const userId = firebase.auth().currentUser.uid;
         e.preventDefault();
         const events = {
             eventName: this.state.eventName,
             eventDate: this.state.eventDate,
-            eventDescription: this.state.eventDescription
+            eventDescription: this.state.eventDescription,
+            eventHost: this.state.eventHost
         }
 
-        const userId = firebase.auth().currentUser.uid;
         const dbRef = firebase.database().ref(`users/${userId}/events`)
         dbRef.push(events)
         .then((data)=>{
@@ -70,8 +74,7 @@ class EventsPage extends React.Component {
     
         this.setState({
             eventDate: '',
-            eventDescription: '',
-
+            eventDescription: ''
         })
     }
 

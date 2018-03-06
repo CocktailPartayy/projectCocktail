@@ -85,15 +85,21 @@ class Home extends React.Component {
     render() {
         return (
             
-            <BrowserRouter>
+            
             <Fragment>
                 {this.state.loggedIn ?
                     <Fragment>
                         {/* <Brent /> */}
-                        <Link to={`/`}>Home</Link>
-                        <Link to={`/events`}>Events</Link>
-                        <Link to={`/search`}>Search</Link>
-                        <button onClick={this.signOut}>sign out</button>
+                        {/* <Link to={`/`}>Home</Link> */}
+                        {/* <Link to={`/events`}>Events</Link> */}
+                        {/* <Link to={`/search`}>Search</Link> */}
+                        {/* <button onClick={this.signOut}>sign out</button> */}
+                        <div className="wrapper">
+                            <div className="partyButton animated tada infinite">
+                                <h3>LET'S PARTY Y'ALLL</h3>    
+                                <Link to={`/search`}><img src="../../assets/martini-icon.png" alt="" /></Link>
+                            </div>
+                        </div>
                         {/* <button onClick={this.retrieveEvent}>get my shit</button> */}
                         {/* what i wanna do is  <Search /> <Events /> <Favs /> */}
 
@@ -117,25 +123,10 @@ class Home extends React.Component {
 
                 }
 
-                    <Fragment>
-                        {/* <Route  path='/'  exact component={Home} /> */}
-                        {/* <Route path='/drink/:drinkID' component={Drink} /> */}
-                        <Route path='/search' exact component={Search} />
-                        <Route path='/search/:searchId' exact component={Drink} />
-
-                        <Route path='/events' exact component={EventsPage} />
-                        {/* <Route path='/events/:eventsId' exact component={Event} /> */}
-                        <Route path='/events/:eventsId'  exact render={(props)=><Event {...this.state} {...props} />} />
-                        
-
-
-                        {/* <Route path='/events/:eventsId' exact render={(props) => ( */}
-                        {/* <EventCard  {...props }/>)}  />  */}
-                        {/* <Route path='/events/:eventsID' params={{ name: props.eventName.eventName }} component={EventCard} /> */}
-                    </Fragment>
+    
 
             </Fragment>
-                </BrowserRouter>
+               
         )
     }
 }

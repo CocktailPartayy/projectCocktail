@@ -11,6 +11,7 @@ export default class Event extends React.Component {
             eName: '',
             eDate: '',
             eDesc: '',
+            eHost:'',
             guests: [],
             recipes: [],
             ingredients: []
@@ -33,13 +34,27 @@ export default class Event extends React.Component {
 
             console.log(recipes);
             const ingredients = [];
+            recipes.map((recipe)=>{
+                for (let property in recipe){
+                    if (/Ingredient/.test(property)) {
+                        if (recipe[property]) {
+                            ingredients.push(recipe[property]);
+                        }
+                        this.setState({
+                            ingredients
+                        })
+                        // console.log(ingredients)
+                    }
+                }
+            })
 
 
             this.setState({
                 eName: e.eventName,
                 eDate: e.eventDate,
                 eDesc: e.eventDescription,
-                recipes
+                recipes,
+                eHost: e.eventHost
                 // guests : snapshot.val().guests
             })
 
@@ -62,7 +77,7 @@ export default class Event extends React.Component {
     
     addUser(e) {
         e.preventDefault();
-        const guestID = this.props.user.displayName;
+        const guestID = this.props.user.uid;
         console.log(guestID);
         let guestsNew = this.state.guests.slice();
         guestsNew.push(guestID);
@@ -84,21 +99,30 @@ export default class Event extends React.Component {
                 <p>{this.state.eDate}</p>
                 <p>{this.state.eDesc}</p>
                 {this.state.recipes.map((recipe, key) => {
-                    return (
-                        <div className="eventRecipeCard" key={key}>
-                            <h3>{recipe.strDrink}</h3>
-                            <ul>
-                                <li>{}</li>
-                            </ul>
-                        </div>
-                        )
-                    })}
-                <button onClick={this.addUser}>Join the thing!</button>
+                    for(let property in recipe) {
+                        if(/Ingredient/.test(property)) {
+                            console.log(property)
+                            return (
+                                <div className="eventRecipeCard" key={key}>
+                                    <h3>{recipe.strDrink}</h3>
+                                    <p>{recipe.strInstructions}</p>
+                                    <ul>
+                                        <li>{recipe[property]}</li>
+                                    </ul>
+                                </div>
+                                )
+                            }
+                        }
+                            
+                    }
+                )
+            }
+                    
+
+                {this.state.guests.includes(this.props.user.uid) || firebase.auth().currentUser.uid == this.state.eHost ? null :
+                    <button onClick={this.addUser}>Join the thing!</button>   
+                }
            </Fragment>
         )
     }
-
 }
-
-
-// question about retrieving uid data in a routed componnent, white tables
