@@ -134,24 +134,31 @@ class App extends React.Component {
           {/* {this.state.loggedIn ? */}
             <Fragment>
               {/* <Brent /> */}
-              <div className='home-wrapper clearfix'>
-                <h1>Welcome {this.state.user.displayName}!</h1>
-                <Link className='home-home' to={`/`}>Home</Link>
-                <Link className='home-search' to={`/search`}>Search</Link>
-                <Link className='home-events' to={`/events`}>Events</Link>
-                <button onClick={this.signOut} className='sign-out'>sign out</button>
-                {/* <button onClick={this.retrieveEvent}>get my shit</button> */}
-                {/* what i wanna do is  <Search /> <Events /> <Favs /> */}
-  
-                {/* <Search /> */}
-                {/* <Event /> */}
-                <Route path='/search' exact component={Search} />
-                <Route path='/search/:searchId' exact component={Drink} />
-  
-                <Route path='/events' exact component={EventsPage} />
-                {/* <Route path='/events/:eventsId' exact component={Event} /> */}
-                <Route path='/events/:eventsId' exact render={(props) => <Event {...this.state} {...props} />} />
+              <Link to={`/`}>Home</Link>
+              <Link to={`/events`}>Events</Link>
+              <Link to={`/search`}>Search</Link>]
+            {this.state.loggedIn ? 
+
+              <button onClick={this.signOut}>sign out</button>
+        : 
+            <div className="sign-in">
+              <div><img className='animated tada infinite' src='../../assets/signin-bkg.png' alt="" /></div>
+              <div>
+                <button onClick={this.signIn}>sign in!</button>
               </div>
+            </div>
+            }
+              {/* <button onClick={this.retrieveEvent}>get my shit</button> */}
+              {/* what i wanna do is  <Search /> <Events /> <Favs /> */}
+
+              {/* <Search /> */}
+              {/* <Event /> */}
+              {/* <Route path='/search' exact component={Search} />
+              <Route path='/search/:searchId' exact component={Drink} />
+
+              <Route path='/events' exact component={EventsPage} />
+              <Route path='/events/:eventsId' exact component={Event} />
+              <Route path='/events/:eventsId' exact render={(props) => <Event {...this.state} {...props} />} /> */}
               {/* <Brent events={this.state.events} /> */}
 
 
@@ -160,16 +167,6 @@ class App extends React.Component {
                 {/* <EventCard  {...props }/>)}  />  */}
                 {/* <Route path='/events/:eventsID' params={{ name: props.eventName.eventName }} component={EventCard} /> */}
               </Fragment>
-
-
-            
-
-            {/* <div className="sign-in">
-              <div><img className='animated tada infinite' src='../../assets/signin-bkg.png' alt="" /></div>
-              <div>
-                <button onClick={this.signIn}>sign in!</button>
-              </div>
-            </div> */}
 
           
 

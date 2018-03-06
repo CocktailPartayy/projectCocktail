@@ -110,7 +110,7 @@ class EventsPage extends React.Component {
                     {this.state.events.map((event, key) => {
                         return (
                             <Link to={`/events/${event.key}`} key={event.key}>
-                                <EventCard key={event.key} event={event} remove={this.removeEvent} />
+                                <EventCard key={event.key} event={event} remove={this.removeEvent}  />
                             </Link>
                         )
                     })}
@@ -120,23 +120,49 @@ class EventsPage extends React.Component {
     }
 }
 
-const EventCard = (props) => {
-    return (
-        <React.Fragment>
-            {/* {console.log(props)} */}
-            {/* <Link to={`/events/event${props.eventKey}`} params={{name: props.event.eventName}}>stuff</Link> */}
-                <div>
-                    <p>{props.event.eventName}</p>
-                    <ul>
-                        <li>Event Date: {props.event.eventDate}</li>
-                        <li>Event Description:{props.event.eventDescription}</li>
-                    </ul>
-                    <p>Date: {props.event.eventDate}</p>
-                    <button className="remove-btn" onClick={() => props.remove(props.eventKey)}><i className="far fa-times-circle"></i></button> 
-                </div>
-
-        </React.Fragment>
-    )
+class EventCard extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            recipes: []
+        }
+    }
+    componentDidMount() {
+        const recipeArray = [];
+        const data = this.props.event.recipes;
+        for (let key in data) {
+            recipeArray.push(data[key]);
+        }
+        this.setState({
+            recipes: recipeArray
+        })
+    }
+    render() {
+        return (
+            <React.Fragment>
+                {/* {console.log(props)} */}
+                {/* <Link to={`/events/event${props.eventKey}`} params={{name: props.event.eventName}}>stuff</Link> */}
+                    <div>
+                        <p>{this.props.event.eventName}</p>
+                        <ul>
+                            <li>Event Date: {this.props.event.eventDate}</li>
+                            <li>Event Description:{this.props.event.eventDescription}</li>
+                            <li>Drinks:
+                                <ul>
+                                    {this.state.recipes.map((recipe, key) => {
+                                        return <li key={key}>{recipe.strDrink}</li>
+                                    })}
+                                </ul>
+                            </li>
+                        </ul>
+                        <p>Date: {this.props.event.eventDate}</p>
+                           
+                        <button className="remove-btn" onClick={() => this.props.remove(this.props.eventKey)}><i className="far fa-times-circle"></i></button> 
+                    </div>
+    
+            </React.Fragment>
+        )
+    }
 }
 
 export default EventsPage;

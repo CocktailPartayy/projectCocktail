@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import {EventsPage, EventCard} from './Eventspage'
+import {EventsPage, EventCard} from './Eventspage';
 
 
 export default class Event extends React.Component {
@@ -11,7 +11,9 @@ export default class Event extends React.Component {
             eName: '',
             eDate: '',
             eDesc: '',
-            guests: []
+            guests: [],
+            recipes: [],
+            ingredients: []
         };
         // this.handleClick = this.handleClick.bind(this);
         this.addUser = this.addUser.bind(this);
@@ -22,14 +24,22 @@ export default class Event extends React.Component {
         // const userId = firebase.auth().currentUser.uid;
         const dbRef = firebase.database().ref(`${this.state.url}`);
         dbRef.on('value', (snapshot) => {
-            console.log(snapshot.val());
             const e = snapshot.val();
-            console.log(snapshot.val().guests);
-            
+            const data = e.recipes;
+            const recipes = [];
+            for (let key in data) {
+                recipes.push(data[key]);
+            }
+
+            console.log(recipes);
+            const ingredients = [];
+
+
             this.setState({
                 eName: e.eventName,
                 eDate: e.eventDate,
                 eDesc: e.eventDescription,
+                recipes
                 // guests : snapshot.val().guests
             })
 
@@ -40,10 +50,14 @@ export default class Event extends React.Component {
             }
         })
 
+<<<<<<< HEAD
         // dbRefE = firebase.database().ref(`/${this.state.url}`)
         
         
         //    console.log(this.props)
+=======
+  
+>>>>>>> 9fda3c2e15e1cc6f6dd755e2868450532199ad4a
     }
     
     componentWillMount() {
@@ -67,34 +81,8 @@ export default class Event extends React.Component {
         const dbRef = firebase.database().ref(`${this.state.url}/guests`);
         dbRef.set(guestsNew);
         console.log(guestsNew)
-        
-
     }
     
-    
-    // componentWillUpdate (){
-    //     // const userId = firebase.auth().currentUser.uid;
-    //     // console.log(userId);
-    // }
-        
-        
-    // handleClick(e){
-    //     e.preventDefault();
-        
-        
-    //     this.setState({
-    //         userId
-    //     })
-    // }
-        
-        // this.setState({
-        //     userId
-        // })
-        // console.log(this.state.userId);
-
-        // 
-        
-    // }
 
     render(){
         return (
@@ -102,6 +90,16 @@ export default class Event extends React.Component {
                 <h2>{this.state.eName}</h2>
                 <p>{this.state.eDate}</p>
                 <p>{this.state.eDesc}</p>
+                {this.state.recipes.map((recipe, key) => {
+                    return (
+                        <div className="eventRecipeCard" key={key}>
+                            <h3>{recipe.strDrink}</h3>
+                            <ul>
+                                <li>{}</li>
+                            </ul>
+                        </div>
+                        )
+                    })}
                 <button onClick={this.addUser}>Join the thing!</button>
            </Fragment>
         )
