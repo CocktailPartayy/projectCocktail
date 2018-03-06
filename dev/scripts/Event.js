@@ -25,19 +25,27 @@ export default class Event extends React.Component {
         // this.handleClick = this.handleClick.bind(this);
     }
     componentDidMount(){
-       
+    //    console.log(this.state.url)
         // const dbRef = firebase.database().ref(``)
         // const userId = firebase.auth().currentUser.uid;
-        const dbRef = firebase.database().ref(`/users/${this.state.userId}${this.state.url}`);
+        // const dbRef = firebase.database().ref(`/users/${this.state.userId}${this.state.url}`);
+        // const dbRef = firebase.database().ref('/events/-L6s7YhY9RHRNQQO6CTQ');
+        const dbRef = firebase.database().ref(this.state.url);
+        
+        
+
         dbRef.on('value', (snapshot) => {
             console.log(snapshot.val());
-            const e = snapshot.val()
-            this.setState({
-                eName: e.eventName,
-                eDate: e.eventDate,
-                eDesc: e.eventDescription
-            })
+            // const e = snapshot.val()
+            // this.setState({
+            //     eName: e.eventName,
+            //     eDate: e.eventDate,
+            //     eDesc: e.eventDescription
+            // })
         })
+
+        // dbRefE = firebase.database().ref(`/${this.state.url}`)
+        
         
     //    console.log(this.props)
     }
@@ -45,7 +53,7 @@ export default class Event extends React.Component {
     componentWillMount() {
         this.setState({
             url: this.props.match.url,
-            userId: this.props.user.uid
+            // userId: this.props.user.uid
         });
     }
     
