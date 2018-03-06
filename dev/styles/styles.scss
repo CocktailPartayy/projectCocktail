@@ -11,7 +11,35 @@ $heading: "Oswald", sans-serif;
 $body: 'Roboto', sans-serif;
 
 body {
-    background-color: $green;
+    background-color: $grey;
+}
+
+a {
+    text-decoration: none;
+    font-family: $body;
+}
+
+button {
+    font-family: $body;
+    background: $pink;
+    border: 2px solid $green;
+    color: $white;
+}
+
+.wrapper {
+    max-width: 1080px;
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    // background: $grey;
+}
+
+.signOutButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 20px;
+    text-transform: uppercase;
 }
 
 .showLocationInput, .recipe-card, .addToEvents {
@@ -102,6 +130,34 @@ body {
         }
     }
     
+}
+
+.partyButton {
+    max-height: 350px;
+    height: 500px;
+    margin: 0 auto;
+    position: relative;
+    h3 {
+        text-align: center;
+        font-family: $heading;
+        font-size: 36px;
+        margin-bottom: 0;
+        color: $green;
+    }
+    a{
+        position:absolute;
+        text-align: center;
+        left:50%;
+        transform: translateX(-50%);
+
+    }
+    a img {
+        height: 300px;
+        background-color: $pink;
+        display: inline-block;
+        margin: 0 auto;
+
+    }
 }
 
 

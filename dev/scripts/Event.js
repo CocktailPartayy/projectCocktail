@@ -11,6 +11,7 @@ export default class Event extends React.Component {
             eName: '',
             eDate: '',
             eDesc: '',
+            eHost:'',
             guests: [],
             recipes: [],
             ingredients: []
@@ -75,7 +76,8 @@ export default class Event extends React.Component {
                 eName: e.eventName,
                 eDate: e.eventDate,
                 eDesc: e.eventDescription,
-                recipes
+                recipes,
+                eHost: e.eventHost
                 // guests : snapshot.val().guests
             })
             // if we have guests then also set guests sas an array
@@ -100,9 +102,8 @@ export default class Event extends React.Component {
     // method used to 
     addUser(e) {
         e.preventDefault();
-        const guestID = this.props.user.displayName;
-        // console.log(guestID);
-        // slice will return the same array back with what we pushed
+        const guestID = this.props.user.uid;
+        console.log(guestID);
         let guestsNew = this.state.guests.slice();
         guestsNew.push(guestID);
         

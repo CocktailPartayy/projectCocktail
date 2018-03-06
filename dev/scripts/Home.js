@@ -82,22 +82,24 @@ class Home extends React.Component {
     render() {
         return (
             
+            
             <Fragment>
                 {this.state.loggedIn ?
-                       <Fragment>
-                            {/* <Brent /> */}
-                            {/* <Link to={`/`}>Home</Link>
-                            <Link to={`/events`}>Events</Link>
-                            <Link to={`/search`}>Search</Link> */}
-                            {/* <button onClick={this.signOut}>sign out</button> */}
-                            {/* <button onClick={this.retrieveEvent}>get my shit</button> */}
-                            {/* what i wanna do is  <Search /> <Events /> <Favs /> */}
-                            <h1>hi</h1>
-                            {/* <Search /> */}
-                            {/* <Event /> */}
-                            
-                            {/* <Brent events={this.state.events} /> */}
-                       </Fragment>
+                    <Fragment>
+                        {/* <Brent /> */}
+                        {/* <Link to={`/`}>Home</Link> */}
+                        {/* <Link to={`/events`}>Events</Link> */}
+                        {/* <Link to={`/search`}>Search</Link> */}
+                        {/* <button onClick={this.signOut}>sign out</button> */}
+                        <div className="wrapper">
+                            <div className="partyButton animated tada infinite">
+                                <h3>LET'S PARTY Y'ALLL</h3>    
+                                <Link to={`/search`}><img src="../../assets/martini-icon.png" alt="" /></Link>
+                            </div>
+                        </div>
+                        {/* <button onClick={this.retrieveEvent}>get my shit</button> */}
+                        {/* what i wanna do is  <Search /> <Events /> <Favs /> */}
+                        </Fragment>
 
 
 
@@ -112,7 +114,11 @@ class Home extends React.Component {
                     </div>
 
                 }
+
+    
+
             </Fragment>
+               
         )
     }
 }

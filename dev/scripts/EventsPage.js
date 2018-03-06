@@ -11,7 +11,8 @@ class EventsPage extends React.Component {
             events: [],
             eventName: '',
             eventDate: '',
-            eventDescription: ''
+            eventDescription: '',
+            eventHost: ''
             // users: []
 
         }
@@ -21,6 +22,7 @@ class EventsPage extends React.Component {
     }
 
     componentDidMount() {
+        const userId = firebase.auth().currentUser.uid;        
         firebase.auth().onAuthStateChanged((user) => {
         // if we have a user response then retreive our user specific events from firebase and set as state
         if (user) {
@@ -35,31 +37,33 @@ class EventsPage extends React.Component {
                 eventsArray.push(eventdata[eventKey])
             }
             this.setState({
-                events: eventsArray
-                    });
-                });
-            } 
+                events: eventsArray,
+                eventHost: userId
+            });
+            });
+        } 
         });
     }
 
     // set state based on user input
     handleChange(e) {
         this.setState({
-            [e.target.id]: e.target.value
+            [e.target.id]: e.target.value,
         });
     }
 
     // method passed when we submit the form
     addEvent(e) {
+        const userId = firebase.auth().currentUser.uid;
         e.preventDefault();
         // compile our event input information into an object
         const events = {
             eventName: this.state.eventName,
             eventDate: this.state.eventDate,
-            eventDescription: this.state.eventDescription
+            eventDescription: this.state.eventDescription,
+            eventHost: this.state.eventHost
         }
 
-        const userId = firebase.auth().currentUser.uid;
         const dbRef = firebase.database().ref(`users/${userId}/events`)
         // push to our user specific event path
         dbRef.push(events)
@@ -71,8 +75,7 @@ class EventsPage extends React.Component {
         })
         this.setState({
             eventDate: '',
-            eventDescription: '',
-
+            eventDescription: ''
         })
     }
 
