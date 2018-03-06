@@ -136,19 +136,29 @@ class App extends React.Component {
               {/* <Brent /> */}
               <Link to={`/`}>Home</Link>
               <Link to={`/events`}>Events</Link>
-              <Link to={`/search`}>Search</Link>
+              <Link to={`/search`}>Search</Link>]
+            {this.state.loggedIn ? 
+
               <button onClick={this.signOut}>sign out</button>
+        : 
+            <div className="sign-in">
+              <div><img className='animated tada infinite' src='../../assets/signin-bkg.png' alt="" /></div>
+              <div>
+                <button onClick={this.signIn}>sign in!</button>
+              </div>
+            </div>
+            }
               {/* <button onClick={this.retrieveEvent}>get my shit</button> */}
               {/* what i wanna do is  <Search /> <Events /> <Favs /> */}
 
               {/* <Search /> */}
               {/* <Event /> */}
-              <Route path='/search' exact component={Search} />
+              {/* <Route path='/search' exact component={Search} />
               <Route path='/search/:searchId' exact component={Drink} />
 
               <Route path='/events' exact component={EventsPage} />
-              {/* <Route path='/events/:eventsId' exact component={Event} /> */}
-              <Route path='/events/:eventsId' exact render={(props) => <Event {...this.state} {...props} />} />
+              <Route path='/events/:eventsId' exact component={Event} />
+              <Route path='/events/:eventsId' exact render={(props) => <Event {...this.state} {...props} />} /> */}
               {/* <Brent events={this.state.events} /> */}
 
 
@@ -157,16 +167,6 @@ class App extends React.Component {
                 {/* <EventCard  {...props }/>)}  />  */}
                 {/* <Route path='/events/:eventsID' params={{ name: props.eventName.eventName }} component={EventCard} /> */}
               </Fragment>
-
-
-            
-
-            {/* <div className="sign-in">
-              <div><img className='animated tada infinite' src='../../assets/signin-bkg.png' alt="" /></div>
-              <div>
-                <button onClick={this.signIn}>sign in!</button>
-              </div>
-            </div> */}
 
           
 
