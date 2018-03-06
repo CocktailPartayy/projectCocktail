@@ -50,14 +50,7 @@ export default class Event extends React.Component {
             }
         })
 
-<<<<<<< HEAD
-        // dbRefE = firebase.database().ref(`/${this.state.url}`)
-        
-        
-        //    console.log(this.props)
-=======
   
->>>>>>> 9fda3c2e15e1cc6f6dd755e2868450532199ad4a
     }
     
     componentWillMount() {
