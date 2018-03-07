@@ -108,25 +108,28 @@ export default class Event extends React.Component {
     render() {
         return (
             <Fragment>
-                <h2>{this.state.eName}</h2>
-                <p>{this.state.eDate}</p>
-                <p>{this.state.eDesc}</p>
-                {this.state.recipes.map((recipe, key) => {
-                    return (
-                        <div className="eventRecipeCard" key={key}>
-                            <h3>{recipe.strDrink}</h3>
-                            <ul>
-                                {recipe.ingredient.map((ing) => {
-                                    return <li><input type='checkbox' />{ing}</li>
-                                })}
-                            </ul>
-                        </div>
-
-                    )
-                })}
-                {/* <button onClick={this.addUser}>Join the thing!</button> */}
-                {this.state.guests.includes(this.props.user.uid) || firebase.auth().currentUser.uid == this.state.eHost ? null :
-                    <button onClick={this.addUser}>Join the thing!</button>}
+                <div className="wrapper event clearfix">
+                    
+                    <h2>{this.state.eName}</h2>
+                    <p>{this.state.eDate}</p>
+                    <p>{this.state.eDesc}</p>
+                    {this.state.recipes.map((recipe, key) => {
+                        return (
+                            <div className="eventRecipeCard" key={key}>
+                                <h3>{recipe.strDrink}</h3>
+                                <ul>
+                                    {recipe.ingredient.map((ing) => {
+                                        return <li><input type='checkbox' />{ing}</li>
+                                    })}
+                                </ul>
+                            </div>
+    
+                        )
+                    })}
+                    {/* <button onClick={this.addUser}>Join the thing!</button> */}
+                    {this.state.guests.includes(this.props.user.uid) || firebase.auth().currentUser.uid == this.state.eHost ? null :
+                        <button onClick={this.addUser}>Join the thing!</button>}
+                </div>
             </Fragment>
         )
     }

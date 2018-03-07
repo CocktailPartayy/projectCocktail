@@ -88,24 +88,28 @@ export default class Drink extends React.Component {
 
     render(){
         return (
-           <div>
-            <Link to={`/search`}>Search</Link>
+           <div className="single-drink wrapper clearfix">
+                <Link to={`/search`}><i className="fas fa-arrow-left"></i></Link>
             <h2>{this.state.drinkName}</h2>
-            <img src={this.state.drinkPic} alt=""/>
-            <p>{this.state.drinkIns}</p>
-            <ul>
-                {/* this will no longer be needed, replace with input that will do another axios call to the LCBO api to render to 3 locations near you */}
-                {this.state.drinkIng.map(ing=>{
-                    return (
-                        <li key={`${this.state.id}-${ing}`}>
-                            <p>{ing}</p>
-                        </li>
-                    )
-                })}
-            </ul>
-            <form onSubmit={this.getLocations}> 
-            <input placeholder="Your address" id="userLoc" value={this.state.userLoc} onChange={this.userInput} type="text"/>
-            <input type="submit" value="Show stores"/>
+            <div className='drink-container'><img src={this.state.drinkPic} alt=""/></div>
+
+            <div className='desc-ing'>
+                <p>{this.state.drinkIns}</p>
+                <ul>
+                    {/* this will no longer be needed, replace with input that will do another axios call to the LCBO api to render to 3 locations near you */}
+                    {this.state.drinkIng.map(ing=>{
+                        return (
+                            <li key={`${this.state.id}-${ing}`}>
+                                <p>{ing}</p>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+
+            <form onSubmit={this.getLocations} className='drink-loc'> 
+                <input placeholder="Your address" id="userLoc" value={this.state.userLoc} onChange={this.userInput} type="text"/>
+                <input className="locButton" type="submit" value="Show stores"/>
             </form>
             {this.state.LcboAddress.map(address =>{
                 return <p key={address}>{address}</p>
