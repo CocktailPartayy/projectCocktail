@@ -62,13 +62,10 @@ export default class Search extends React.Component {
     }
     
     render() {
-        console.log('searrr')
         return (
             <Fragment>
                 <div className='search clearfix'>
                     <h1 className='banner'>Search 
-                        <div className='drink-icon'><img src="../../assets/drink-icon.png" alt="" />
-                        </div>
                     </h1>
     
                     <div className='wrapper'>

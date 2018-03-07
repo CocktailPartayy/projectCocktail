@@ -88,37 +88,42 @@ class EventsPage extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
-                <h1 className='banner'>Event
-                    <div className='drink-icon'>
-                        <img src="../../assets/drink-icon.png" alt="" />
-                    </div>
-                </h1>
-                <form onSubmit={this.addEvent}>
-                    <h2>Let's Create An Event</h2>
-                    <label htmlFor="eventName">Event Name:</label>
-                    <input type="text" onChange={this.handleChange} id="eventName" placeholder="Enter Name" value={this.state.eventName}/>
+            <div className='events-page'>
+                <h1 className='banner'>Events</h1>
+                <div className='wrapper clearfix'>
+                    <form className='event-form' onSubmit={this.addEvent}>
+                        <h2>Let's Create An Event</h2>
+                        <div className='event-form-name form-component'>
+                            <label htmlFor="eventName">Event Name:</label>
+                            <input type="text" onChange={this.handleChange} id="eventName" placeholder="Enter Name" value={this.state.eventName}/>
+                        </div>
+        
+                        <div className='event-form-date form-component'>
+                            <label htmlFor="eventDate">Event Date:</label>
+                            <input type="date" onChange={this.handleChange} id="eventDate" value={this.state.eventDate} />
+                        </div>
     
-                    <label htmlFor="eventDate">Event Date:</label>
-                    <input type="date" onChange={this.handleChange} id="eventDate" value={this.state.eventDate} />
+                        <div className='event-form-desc form-component'>
+                            <label htmlFor="eventDescription">Description:</label>
+                            <textarea name="eventDescription" value={this.state.eventDescription} id="eventDescription" cols="10" rows="5" onChange={this.handleChange} placeholder="Details"></textarea>
+                        </div>
 
-                    <label htmlFor="eventDescription">Description:</label>
-                    <textarea name="eventDescription" value={this.state.eventDescription} id="eventDescription" cols="10" rows="5" onChange={this.handleChange} placeholder="Details"></textarea>
-                    <input type="submit" value="Add Event"/>
-                </form>
-
-                {/* takes the events array returned from firebase and map it and show each event card onn click of the button the removeEvent method will take the eventkey and remove from firebase, thus our event page*/}
-                    {this.state.events.map((event, key) => {
-                        return (
-                            <div key={event.key}>
-                                <Link to={`/events/${event.key}`} key={event.key}>
-                                    <EventCard key={event.key} event={event}  />
-                                </Link>
-                                <button className="remove-btn" onClick={() => this.removeEvent(event.key)}><i className="far fa-times-circle"></i></button> 
-                            </div>
-                        )
-                    })}
-            </React.Fragment>
+                        <input className='event-form-submit' type="submit" value="Add Event"/>
+                    </form>
+    
+                    {/* takes the events array returned from firebase and map it and show each event card onn click of the button the removeEvent method will take the eventkey and remove from firebase, thus our event page*/}
+                        {this.state.events.map((event, key) => {
+                            return (
+                                <div key={event.key} className='single-event'>
+                                    <Link to={`/events/${event.key}`} key={event.key}>
+                                        <EventCard key={event.key} event={event}  />
+                                    </Link>
+                                    <button className="remove-btn" onClick={() => this.removeEvent(event.key)}><i className="far fa-times-circle"></i></button> 
+                                </div>
+                            )
+                        })}
+                </div>
+            </div>
         )
     }
 }
@@ -145,21 +150,21 @@ class EventCard extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div>
-                    <p>{this.props.event.eventName}</p>
+                <div className='linked-event'>
+                    <h2>{this.props.event.eventName}</h2>
                     <ul>
-                        <li>Event Date: {this.props.event.eventDate}</li>
-                        <li>Event Description:{this.props.event.eventDescription}</li>
-                        <li>Drinks:
+                        <li><h3>Date:</h3>{this.props.event.eventDate}</li>
+                        <li><h3>Description:</h3> {this.props.event.eventDescription}</li>
+                        <li><h3>Drinks:</h3>
                             <ul>
                                 {/* mapping over state annd rendering the drinks we have added */}
                                 {this.state.recipes.map((recipe, key) => {
-                                    return <li key={key}>{recipe.strDrink}</li>
+                                    return <li className='linked-drinks' key={key}>{recipe.strDrink}</li>
                                 })}
                             </ul>
                         </li>
                     </ul>
-                    <p>Date: {this.props.event.eventDate}</p>
+                    {/* <p>Date: {this.props.event.eventDate}</p> */}
                         
                     
                 </div>

@@ -84,16 +84,14 @@ class Home extends React.Component {
             <Fragment>
                 <div className='home-page'>
                     <div className="wrapper">
-                        <h1 className='banner' >Welcome, {`${this.state.user.displayName}`}! 
-                            <div className='drink-icon'><img src="../../assets/drink-icon.png" alt="" /></div>
-                        </h1>
-
-                        <Link to={'/search'}>
-                            <div className='home-party animated bounceInDown'>
+                        <h1 className='banner' >Welcome, {`${this.state.user.displayName}`}!</h1>
+                        {/* <h2 className='banner-title'>Let's Party!</h2> */}
+                        {/* <Link to={'/search'}> */}
+                            {/* <div className='home-party animated bounceInDown'>
                                 <h2>let's party!</h2>
                                 <img src="../../assets/home-party.png" alt=""/>
-                            </div>
-                        </Link>
+                            </div> */}
+                        {/* </Link> */}
                     </div>
                 </div>
             </Fragment>
