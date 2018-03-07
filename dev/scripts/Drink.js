@@ -66,6 +66,7 @@ export default class Drink extends React.Component {
         if (this.state.userLoc !== '') {
             axios.get(configKey.apiURLS, {
                 params: {
+                    Authorization: `Token ${configKey.apiKey}`,
                     access_key: configKey.apiKey,
                     geo: this.state.userLoc,
                     order: 'distance_in_meters.asc'

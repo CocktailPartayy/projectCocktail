@@ -41,12 +41,9 @@ a {
 .banner {
     margin: 0;
     font-size: 40px;
-    // width: 300px;
     font-family: $heading;
     color: $green;
-    // text-shadow: 5px 5px $darkgrey;
     padding: 10px 0 10px 5%;
-    // background: $green;
     letter-spacing: 2px;
     .drink-icon {
         width: 40px;
@@ -72,21 +69,17 @@ a {
     width: 100%;
     z-index: 10;
     position: fixed;
-    // display: block;
     bottom: 0;
     display: block;
     font-family: $heading;
     font-size: 30px;
     background: $green;
     .link {
-        // border: 1px solid white;
         color: $white;
         text-decoration: none;
         float: left;
         width: 33.33%;
-        // display: block;
         text-align: center;
-        // position: fixed;
         bottom: 0;
         padding: 10px;
         &:hover {
@@ -119,10 +112,8 @@ a {
     url(../../assets/background4.jpg) center repeat;
     background-size: cover;
     animation: picture 50s linear infinite;
-    // background: $grey;
     height: 100vh;
     position: relative;
-    // width: 100%;
     .wrapper {
         width: 95%;
         margin: 0 auto;
@@ -130,22 +121,10 @@ a {
             color: $white;
             text-shadow: 5px 5px $green;
         }
-        // .banner-title {
-        //     text-align: center;
-        //     font-size: 90px;
-        //     font-family: $heading;
-        //     color: white;
-        //     margin: 0;
-        //     position: relative;
-        //     margin-top: 10%;
-        //     background: $green;
-        // }
+
         .home-party {
             width: 80%;
-            // position: absolute;
             margin: 100px auto;
-            // top: 50%;
-            // transform: translateY(-50%);
             h2 {
                 margin: 0;
                 text-align: center;
@@ -154,7 +133,6 @@ a {
             }
             img {
                 width: 100%;
-                // margin: 0 auto;
             }
         }
     }
@@ -193,6 +171,10 @@ a {
             font-size: 30px;
             padding: 10px 15px;
             text-transform: capitalize;
+            @media (max-width: 480px) {
+                font-size: 16px;
+                width: 60%;
+            }
         }
     }  
 }
@@ -202,10 +184,8 @@ a {
     label {
         display: block;
         margin-bottom: 20px;
-        // width: 50%;
         input {
             padding: 10px 20px;
-            // margin-right: 10px;
             height: 40px;
             border: 3px solid $pink;
             outline: none;
@@ -217,14 +197,10 @@ a {
             padding-left: 20px; 
             padding-right: 20px;
             text-transform: capitalize;
-             
-            // outline: none; 
             border: none;  
-            // padding: 10px 20px;
             font-family: $heading;
             position: relative;
             top: 1px;
-            // display: inline-block;
         }
     }
     .drink-preview {
@@ -232,7 +208,6 @@ a {
         float: left;
         display: block;
         padding: 10px;
-        // margin-bottom: 20px;
         position: relative;
         border: 3px solid transparent;
         transition: 0.5s;
@@ -253,17 +228,17 @@ a {
             .drink-pic {
                 margin: 0 auto;
                 width: 80%;
-                // border-radius: 50%;
-                // border: 2px solid $pink;
                 img {
                     width: 100%;
                 border: 5px solid $white;
                     
                 }
             }
+            &:hover {
+            color: $white;
+            }
         }
         .add-me-div {
-            // position: relative;
             .add-me {
                 position: absolute;
                 bottom: 5%;
@@ -295,9 +270,7 @@ a {
                     button {
                         width: 100%;
                     }
-                    // width: 100%;
                 }
-                
             }
         }
     }
@@ -317,13 +290,16 @@ a {
             font-family: $heading;
             font-size: 30px;
             margin: 0 0 10px 0;
+            @media (max-width: 480px) {
+                font-size: 25px;
+            }
             // position: relative;
         }
         .form-component {
             margin-bottom: 10px;
             font-size: 18px;
             @media (max-width: 480px) {
-                font-size: 18px;
+                font-size: 16px;
             }
             label  {
                 font-family: $body;
@@ -339,7 +315,7 @@ a {
                 padding: 10px 15px;
                 width: 40%;
                 @media (max-width: 480px) {
-                    width: 60%;
+                    width: 100%;
                 }
             }
             textarea {
@@ -369,6 +345,11 @@ a {
             font-size: 20px;
             font-family: $heading;
             color: $white;
+            @media (max-width: 480px) {
+                position: relative;
+                width: 100%;
+
+            }
         }
     }
     .single-event {
@@ -480,12 +461,8 @@ a {
             position: relative;
             top: 2px;
             text-transform: capitalize;
-
         }
-        // margin-top: 30px;
     }
-    // background: $grey;
-    // border: 1px solid black;
 }
 
 .event {
@@ -517,11 +494,7 @@ a {
         }
 
     }
-    // li label {
-    //     border: 2px solid $pink;
-    // }
     input[type=checkbox] {
-        // visibility: hidden;
         margin-right: 10px;
     }
 }

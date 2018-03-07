@@ -16,13 +16,9 @@ export default class Event extends React.Component {
             recipes: [],
             ingredients: []
         };
-        // this.handleClick = this.handleClick.bind(this);
         this.addUser = this.addUser.bind(this);
     }
     componentDidMount() {
-
-        // const dbRef = firebase.database().ref(``)
-        // const userId = firebase.auth().currentUser.uid;
         const dbRef = firebase.database().ref(`${this.state.url}`);
         dbRef.on('value', (snapshot) => {
             const e = snapshot.val();
@@ -37,24 +33,14 @@ export default class Event extends React.Component {
 
             recipes.map(recipe => {
                 const ingredients = [];
-                // console.log(recipe);
                 for (let property in recipe) {
-                    // console.log(property);
                     if (/Ingredient/.test(property)) {
                         if (!recipe[property]) {
                             delete recipe[property];
-                            // console.log(recipe[property])
-                            // recipe.ingredients = ingredients.push(recipe[property]);
                         } else {
-
-                            // console.log(recipe[property]);
-                            // const newArray= [];
                             ingredients.push(recipe[property]);
 
                             recipe.ingredient = ingredients;
-
-                            // console.log(newArray);
-
                         }
                     }
                 }
@@ -66,9 +52,8 @@ export default class Event extends React.Component {
                 eName: e.eventName,
                 eDate: e.eventDate,
                 eDesc: e.eventDescription,
-                recipes,
-                eHost: e.eventHost
-                // guests : snapshot.val().guests
+                eHost: e.eventHost,
+                recipes
             })
 
             if (snapshot.val().guests) {
@@ -84,7 +69,6 @@ export default class Event extends React.Component {
     componentWillMount() {
         this.setState({
             url: this.props.match.url,
-            // userId: this.props.user.uid
         });
     }
 
@@ -126,7 +110,6 @@ export default class Event extends React.Component {
     
                         )
                     })}
-                    {/* <button onClick={this.addUser}>Join the thing!</button> */}
                     {this.state.guests.includes(this.props.user.uid) || firebase.auth().currentUser.uid == this.state.eHost ? null :
                         <button onClick={this.addUser}>Join the thing!</button>}
                 </div>
