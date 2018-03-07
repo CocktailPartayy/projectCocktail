@@ -41,24 +41,6 @@ export default class DrinkList extends React.Component {
                  })
             }   
         }
-
-        // this gives us the current  logged in user's uid
-        // const userId = firebase.auth().currentUser.uid;
-        // // this refers to each user's uid path on firebase
-        // const dbRefz = firebase.database().ref(`/users/${userId}`);
-        // // retrieving data from firebase
-        // dbRefz.on('value', (snapshot) => {
-        //     // we took the events and pushed it
-        //     const data = snapshot.val().events
-        //     const eventId = [];
-        //     for (let key in data) {
-        //         data[key].key = key;
-        //         eventId.push(data[key].key);
-        //     }
-        //     this.setState({
-        //         eId: eventId
-        //     })
-        // })
     }
 
     addDrink(eventKey) {

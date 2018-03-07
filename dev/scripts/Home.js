@@ -2,14 +2,11 @@ import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import configKey from './config-key';
-// import { EventsPage,  EventCard } from './EventsPage';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import Search from './Search'
 import Drink from './Drink'
-// import Home from './Home'
 import EventsPage from './EventsPage'
 import Event from './Event'
-// import EventsPage from './EventsPage'
 
 class Home extends React.Component {
     constructor() {
@@ -52,17 +49,12 @@ class Home extends React.Component {
                 dbRef.update({ name: `${this.state.user.displayName}` });
                 const userId = firebase.auth().currentUser.uid;
                 const dbRefz = firebase.database().ref(`/users/${userId}/events`);
-                // const dbRef = firebase.database().ref(`/events`);
                 dbRefz.on('value', (snapshot) => {
                     const data = snapshot.val();
-                    // console.log(data);
                     const state = [];
                     for (let key in data) {
-                        // console.log(key);
-
                         // grab object, add property of key annd assign value of key that firebase provides!!!
                         data[key].key = key;
-                        // console.log(data[key]);
                         state.push(data[key]);
                     }
                     this.setState({
@@ -85,13 +77,6 @@ class Home extends React.Component {
                 <div className='home-page'>
                     <div className="wrapper">
                         <h1 className='banner' >Welcome, {`${this.state.user.displayName}`}!</h1>
-                        {/* <h2 className='banner-title'>Let's Party!</h2> */}
-                        {/* <Link to={'/search'}> */}
-                            {/* <div className='home-party animated bounceInDown'>
-                                <h2>let's party!</h2>
-                                <img src="../../assets/home-party.png" alt=""/>
-                            </div> */}
-                        {/* </Link> */}
                     </div>
                 </div>
             </Fragment>
@@ -101,33 +86,3 @@ class Home extends React.Component {
 
 export default Home;
 
-
-
-
-// <Fragment>
-//     {this.state.loggedIn ?
-//         <Fragment>
-//             <div className="wrapper">
-//                 <div className="partyButton">
-//                     <h3>LET'S PARTY Y'ALLL</h3>    
-//                     <Link to={`/search`}><img src="../../assets/martini-icon.png" alt="" /></Link>
-//                 </div>
-//             </div>
-//             </Fragment>
-
-
-
-//         :
-
-//         <div className="sign-in">
-//             <div><img className='animated tada infinite' src='../../assets/signin-bkg.png' alt="" /></div>
-//             <div>
-//                 <button onClick={this.signIn}>sign in!</button>
-//             </div>
-//         </div>
-
-//     }
-
-
-
-// </Fragment>

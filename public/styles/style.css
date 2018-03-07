@@ -258,6 +258,10 @@ a {
       font-size: 30px;
       padding: 10px 15px;
       text-transform: capitalize; }
+      @media (max-width: 480px) {
+        .sign-in-page div button {
+          font-size: 16px;
+          width: 60%; } }
 
 .search {
   margin-bottom: 70px; }
@@ -305,6 +309,8 @@ a {
       .search .drink-preview .drink-link .drink-pic img {
         width: 100%;
         border: 5px solid #FFFFFF; }
+    .search .drink-preview .drink-link:hover {
+      color: #FFFFFF; }
     .search .drink-preview .add-me-div .add-me {
       position: absolute;
       bottom: 5%;
@@ -342,12 +348,15 @@ a {
       font-family: "Oswald", sans-serif;
       font-size: 30px;
       margin: 0 0 10px 0; }
+      @media (max-width: 480px) {
+        .events-page .event-form h2 {
+          font-size: 25px; } }
     .events-page .event-form .form-component {
       margin-bottom: 10px;
       font-size: 18px; }
       @media (max-width: 480px) {
         .events-page .event-form .form-component {
-          font-size: 18px; } }
+          font-size: 16px; } }
       .events-page .event-form .form-component label {
         font-family: "Roboto", sans-serif;
         width: 150px;
@@ -362,7 +371,7 @@ a {
         width: 40%; }
         @media (max-width: 480px) {
           .events-page .event-form .form-component input {
-            width: 60%; } }
+            width: 100%; } }
       .events-page .event-form .form-component textarea {
         width: 85%;
         padding: 10px 15px;
@@ -384,6 +393,10 @@ a {
       font-size: 20px;
       font-family: "Oswald", sans-serif;
       color: #FFFFFF; }
+      @media (max-width: 480px) {
+        .events-page .event-form .event-form-submit {
+          position: relative;
+          width: 100%; } }
   .events-page .single-event {
     width: 50%;
     float: left;

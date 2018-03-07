@@ -13,8 +13,6 @@ class EventsPage extends React.Component {
             eventDate: '',
             eventDescription: '',
             eventHost: ''
-            // users: []
-
         }
         this.handleChange = this.handleChange.bind(this);
         this.addEvent = this.addEvent.bind(this);
@@ -95,7 +93,7 @@ class EventsPage extends React.Component {
                         <h2>Let's Create An Event</h2>
                         <div className='event-form-name form-component'>
                             <label htmlFor="eventName">Event Name:</label>
-                            <input type="text" onChange={this.handleChange} id="eventName" placeholder="Enter Name" value={this.state.eventName}/>
+                            <input type="text" onChange={this.handleChange} required id="eventName" placeholder="Enter Name" value={this.state.eventName}/>
                         </div>
         
                         <div className='event-form-date form-component'>
@@ -175,5 +173,3 @@ class EventCard extends React.Component {
 }
 
 export default EventsPage;
-// export {EventsPage, EventCard};
-// export EventCard;
