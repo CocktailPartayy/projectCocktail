@@ -13,10 +13,9 @@ import Home from './Home'
 
 
 const imgStyle = {
-  width: '200px',
+  // width: '200px',
   borderRadius: '50%'
 }
-export { imgStyle };
 
 
 const btnStyle = {
@@ -24,6 +23,7 @@ const btnStyle = {
   border: 'none'
 }
 
+export { imgStyle };
 
 // initialize firebase
 var config = {
@@ -111,24 +111,20 @@ class App extends React.Component {
         <Fragment>
             {/* ternary operator, if user state logged inn then we only show the signout button, the links and the Routes*/}
             {this.state.loggedIn ? 
-              <Fragment>
-                <div className='home-page'>
-                <div className="wrapper">
-                  <h1>Welcome, {`${this.state.user.displayName}`}!</h1>
-                    <Link to={`/`}>Home</Link>
-                    <Link to={`/search`}>Search</Link>
-                    <Link to={`/events`}>Events</Link>
-                  
-                    <button className="signOutButton" onClick={this.signOut}>sign out</button>
-                </div>
-                  {/* we passed this.state and props down this.state refers to app and props refers to the props route itself has like history, match etc */}
-                  <Route path='/' exact component={Home} />
-                  <Route path='/search' exact render={(props) => <Search {...this.state} {...props} />} />
-                  <Route path='/search/:searchId' exact component={Drink} />
-                  <Route path='/events' exact component={EventsPage} />
-                  <Route path='/events/:eventsId' exact render={(props) => <Event {...this.state} {...props} />} />
-                </div>
-              </Fragment>
+             
+                  <Fragment>
+                    <nav className='links clearfix'>
+                      <Link className='home-link link' to={`/`}>Home</Link>
+                      <Link className='search-link link' to={`/search`}>Search</Link>
+                      <Link className='event-link link' to={`/events`}>Events</Link>
+                    </nav>
+                    <button className="sign-out-button" onClick={this.signOut}>sign out</button>
+                    <Route path='/' exact component={Home} />
+                    <Route path='/search' exact render={(props) => <Search {...this.state} {...props} />} />
+                    <Route path='/search/:searchId' exact component={Drink} />
+                    <Route path='/events' exact component={EventsPage} />
+                    <Route path='/events/:eventsId' exact render={(props) => <Event {...this.state} {...props} />} />
+                  </Fragment>
            
            : 
               
@@ -152,3 +148,16 @@ ReactDOM.render(<App />, document.getElementById('app'));
 
 
 // email.replace(/\./g, '-')
+
+
+{/* <Fragment>
+  <div className='home-page'>
+    <div className="wrapper">
+      <h1>Welcome, {`${this.state.user.displayName}`}!</h1>
+      <Link to={`/`}>Home</Link>
+      <Link to={`/search`}>Search</Link>
+      <Link to={`/events`}>Events</Link>
+
+      <button className="signOutButton" onClick={this.signOut}>sign out</button>
+    </div>
+    we passed this.state and props down this.state refers to app and props refers to the props route itself has like history, match etc */}

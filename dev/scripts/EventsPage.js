@@ -89,6 +89,11 @@ class EventsPage extends React.Component {
     render() {
         return (
             <React.Fragment>
+                <h1 className='banner'>Event
+                    <div className='drink-icon'>
+                        <img src="../../assets/drink-icon.png" alt="" />
+                    </div>
+                </h1>
                 <form onSubmit={this.addEvent}>
                     <h2>Let's Create An Event</h2>
                     <label htmlFor="eventName">Event Name:</label>
@@ -140,24 +145,24 @@ class EventCard extends React.Component {
     render() {
         return (
             <React.Fragment>
-                    <div>
-                        <p>{this.props.event.eventName}</p>
-                        <ul>
-                            <li>Event Date: {this.props.event.eventDate}</li>
-                            <li>Event Description:{this.props.event.eventDescription}</li>
-                            <li>Drinks:
-                                <ul>
-                                    {/* mapping over state annd rendering the drinks we have added */}
-                                    {this.state.recipes.map((recipe, key) => {
-                                        return <li key={key}>{recipe.strDrink}</li>
-                                    })}
-                                </ul>
-                            </li>
-                        </ul>
-                        <p>Date: {this.props.event.eventDate}</p>
-                           
+                <div>
+                    <p>{this.props.event.eventName}</p>
+                    <ul>
+                        <li>Event Date: {this.props.event.eventDate}</li>
+                        <li>Event Description:{this.props.event.eventDescription}</li>
+                        <li>Drinks:
+                            <ul>
+                                {/* mapping over state annd rendering the drinks we have added */}
+                                {this.state.recipes.map((recipe, key) => {
+                                    return <li key={key}>{recipe.strDrink}</li>
+                                })}
+                            </ul>
+                        </li>
+                    </ul>
+                    <p>Date: {this.props.event.eventDate}</p>
                         
-                    </div>
+                    
+                </div>
     
             </React.Fragment>
         )

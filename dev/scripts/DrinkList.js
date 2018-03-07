@@ -82,22 +82,24 @@ export default class DrinkList extends React.Component {
     render() {
         return (
            <Fragment>
-               <div className="drinkPreview">
+               <div className="wrapper">
                     {/* on click it will show the events you can add to (otherwise it will all show)*/}
-                    <button onClick={this.addToEvent}>Add me</button>
-                    <div>
-                        {/* refered to the addToEvent method */}
-                        <ul className="addToEvents" ref={ref => this.addToEvents = ref}>
-                        {/* map through the events passed from Search passed originally from app, for each event use the eventkey property as a argument to pass the addDrink function whcich sends what you added to firebase*/}
-                        {this.props.events.map((event, key)=> {
-                                return <li key={event.key}>{event.eventName} <button onClick={() => this.addDrink(event.key)}>Add drink</button></li>
-                        })}
-                        </ul>
+                    <div className='drink-preview'>
+                        {/* this is for routing, on click of the drinkThumb, itll route us to  the Drink component based on the id  */}
+                        <Link className='drink-link' to={`/search/${this.props.drinks.idDrink}`}>
+                            <DrinkThumb drinkName={this.props.drinks.strDrink} drinkPic={this.props.drinks.strDrinkThumb} key={`DrinkThumb-${this.props.drinks.idDrink}`}/>
+                        </Link>
+                        <div className='add-me-div'>
+                        <button  className='add-me' onClick={this.addToEvent}>+</button>
+                            {/* refered to the addToEvent method */}
+                            <ul className="addToEvents" ref={ref => this.addToEvents = ref}>
+                            {/* map through the events passed from Search passed originally from app, for each event use the eventkey property as a argument to pass the addDrink function whcich sends what you added to firebase*/}
+                            {this.props.events.map((event, key)=> {
+                                    return <li key={event.key}> <button onClick={() => this.addDrink(event.key)}>{event.eventName}</button></li>
+                            })}
+                            </ul>
+                        </div>
                     </div>
-                    {/* this is for routing, on click of the drinkThumb, itll route us to  the Drink component based on the id  */}
-                    <Link to={`/search/${this.props.drinks.idDrink}`}>
-                        <DrinkThumb drinkName={this.props.drinks.strDrink} drinkPic={this.props.drinks.strDrinkThumb} key={`DrinkThumb-${this.props.drinks.idDrink}`}/>
-                    </Link>
                </div>
            </Fragment>
         )
@@ -107,9 +109,9 @@ export default class DrinkList extends React.Component {
 // simple component with props pass down down for just each 
 const DrinkThumb = (props) => {
     return (
-        <div>
+        <Fragment>
             <h2>{props.drinkName}</h2>
-            <img style={imgStyle} src={props.drinkPic} alt="" />
-        </div>
+            <div className="drink-pic"><img style={imgStyle} src={props.drinkPic} alt="" /></div>
+        </Fragment>
     )
 }
