@@ -65,20 +65,36 @@ export default class Search extends React.Component {
         console.log('searrr')
         return (
             <Fragment>
-                <form onSubmit={this.getDrinksList}>
-                    <label htmlFor="ByName">Search by Name</label>
-                    <input type="text" name='name' id='byName' value={this.state.byName} onChange={this.userInput} />
-                    <button>submit</button>
-                </form>
-                <form onSubmit={this.getDrinksList}>
-                    <label htmlFor="ByIng">Search by Ingredient</label>
-                    <input type="text" name='ingredient' id="byIng" value={this.state.byIng} onChange={this.userInput} />      
-                    <button>submit</button>    
-                </form>  
-
-                {this.state.drinksList ? this.state.drinksList.map(drink=> {
-                   return <DrinkList drinks={drink} key={drink.idDrink} drinksList={this.state.drinksList} events={this.props.events}/>
-                }): null}
+                <div className='search clearfix'>
+                    <h1 className='banner'>Search 
+                        <div className='drink-icon'><img src="../../assets/drink-icon.png" alt="" />
+                        </div>
+                    </h1>
+    
+                    <div className='wrapper'>
+                        <form onSubmit={this.getDrinksList} className=''>
+                            {/* <label htmlFor="ByName">Search by Name</label> */}
+                            <label  htmlFor='byName'>
+                                <input type="text" placeholder='Search Cocktail Name' name='name' id='byName' value={this.state.byName} onChange={this.userInput} />
+                                <button>search</button>
+                            </label>
+        
+                            {/* <label htmlFor="ByIng">Search by Ingredient</label> */}
+                            <label htmlFor='byIng'>
+                                <input type="text" name='ingredient' placeholder='Search Ingredient' id="byIng" value={this.state.byIng} onChange={this.userInput} />
+                                <button>search</button> 
+                            </label> 
+                        </form>
+                    </div>
+    
+                    {/* <form onSubmit={this.getDrinksList}>
+                          
+                    </form>   */}
+    
+                    {this.state.drinksList ? this.state.drinksList.map(drink=> {
+                       return <DrinkList drinks={drink} key={drink.idDrink} drinksList={this.state.drinksList} events={this.props.events}/>
+                    }): null}
+                </div>
             </Fragment>
         ) 
     }

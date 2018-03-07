@@ -5,42 +5,141 @@ $green: #2A4F5C;
 $pink: #EBBBC9;
 $grey: #BAC0C5;
 $white: #FFFFFF;
+$darkgrey: rgb(46, 45, 45);
 
 // fonts
 $heading: "Oswald", sans-serif;
 $body: 'Roboto', sans-serif;
 
-body {
-    background-color: $grey;
+li {
+    list-style: none;
 }
 
 a {
     text-decoration: none;
-    font-family: $body;
+    color: $darkgrey;
+    display: block;
+    &:visited {
+        color: inherit
+    }
 }
 
-button {
-    font-family: $body;
-    background: $pink;
-    border: 2px solid $green;
-    color: $white;
+.banner {
+    margin: 0;
+    font-size: 40px;
+    // width: 300px;
+    font-family: $heading;
+    color: $green;
+    // text-shadow: 5px 5px $darkgrey;
+    padding: 10px 0 10px 5%;
+    // background: $green;
+    letter-spacing: 2px;
+    .drink-icon {
+        width: 40px;
+        display: inline-block;
+        img {
+            width: 100%;
+        }
+    }
 }
 
 .wrapper {
-    max-width: 1080px;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
-    position: relative;
-    // background: $grey;
 }
 
-.signOutButton {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 10px 20px;
-    text-transform: uppercase;
+
+// styling the links in the app component 
+.links {
+    width: 100%;
+    z-index: 10;
+    position: fixed;
+    // display: block;
+    bottom: 0;
+    display: block;
+    font-family: $heading;
+    font-size: 30px;
+    background: $green;
+    .link {
+        // border: 1px solid white;
+        color: $white;
+        text-decoration: none;
+        float: left;
+        width: 33.33%;
+        // display: block;
+        text-align: center;
+        // position: fixed;
+        bottom: 0;
+        padding: 10px;
+        &:hover {
+            background: $darkgrey;
+        }
+    }
+    .home-link, .search-link {
+        border-right: 1px solid white;
+    }
 }
+
+.sign-out-button {
+    position: fixed;
+    right: 5%;
+    top: 20px;
+    font-family: $heading;
+    background: $darkgrey;
+    color: white;
+    padding: 7px 22px;
+    text-transform: capitalize;
+    z-index: 20;
+
+}
+
+// home component 
+
+.home-page {
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),
+    url(../../assets/background3.png);
+    // background: $grey;
+    height: 100vh;
+    position: relative;
+    // width: 100%;
+    .wrapper {
+        width: 95%;
+        margin: 0 auto;
+        // .home-banner {
+        //     margin: 0;
+        //     font-size: 40px;
+        //     font-family: $heading;
+        //     color: $white;
+        //     text-shadow: 5px 5px $darkgrey;
+        //     padding: 10px 0 10px 5%;
+        //     // background: $green;
+        //     letter-spacing: 2px;
+        //     .drink-icon {
+        //         width: 40px;
+        //         display: inline-block;
+        //         img {
+        //             width: 100%;
+        //         }
+        //     }
+        }
+        .home-party {
+            width: 80%;
+            // position: absolute;
+            margin: 100px auto;
+            // top: 50%;
+            // transform: translateY(-50%);
+            h2 {
+                margin: 0;
+                text-align: center;
+                color: $white;
+                outline: $green;
+            }
+            img {
+                width: 100%;
+                // margin: 0 auto;
+            }
+        }
+    }
 
 .showLocationInput, .recipe-card, .addToEvents {
     opacity: 0;
@@ -76,88 +175,181 @@ button {
             padding: 10px 15px;
             text-transform: capitalize;
         }
-    }
-    // background: url('../../assets/signin-bkg.png') center no-repeat;
+    }  
 }
 
-.home {
-    // background:$white;
-    height: 100vh;
-    padding: 5vh 0;
-
-    .home-wrapper{
-        width: 80%;
-        background: $white;
-        margin: 0 auto;
-        position: relative;
-        // margin-top: 5vh;
-        height: 90vh;
-        border-radius: 20px;
-
-        h1 {
-            width: 80%;
-            float: left;
-            // text-align: center;
-            margin: 0 0 10px 5%;
-            font-size: 45px;
-            font-family: $heading;
-        }
-        
-        button {
-            position: absolute;
-            right: 2%;
-            top: 3%;
-            font-family: $heading;
-        }
-        a {
-            width: 33.33%;
-            float: left;
-            text-align: center;
-            font-family: $heading;
-            font-size: 20px;
-            text-decoration: none;
-            color: $green;
-            
-            
-            &:visited {
-                text-decoration: none;
-                color: $green;
-                // color: $white;
-            }
-            // position: relative;
-            // bottom: 0;
+.search {
+    margin-bottom: 70px;
+    label {
+        display: block;
+        margin-bottom: 20px;
+        // width: 50%;
+        input {
+            padding: 10px 20px;
             // margin-right: 10px;
+            height: 40px;
+            border: 3px solid $pink;
+            outline: none;
+        }
+        button {
+            height: 40px;    
+            background: $pink;
+            color: $white;   
+            padding-left: 20px; 
+            padding-right: 20px;
+            text-transform: capitalize;
+             
+            // outline: none; 
+            border: none;  
+            // padding: 10px 20px;
+            font-family: $heading;
+            position: relative;
+            top: 1px;
+            // display: inline-block;
         }
     }
+    .drink-preview {
+        width: 33.3%;
+        float: left;
+        display: block;
+        padding: 10px;
+        margin-bottom: 20px;
+        position: relative;
+        border: 3px solid transparent;
+        &:hover {
+            border: 3px solid $pink;
+        }
+        @media (max-width: 480px) {
+            width: 100%;
+        }
+        .drink-link {
+            h2 {
+                text-align: center;
+                font-family: $heading;
+                font-size: 25px;
+            }
+            .drink-pic {
+                margin: 0 auto;
+                width: 80%;
+                img {
+                    width: 100%;
+                }
+            }
+        }
+        .add-me-div {
+            // position: relative;
+            .add-me {
+                position: absolute;
+                bottom: 5%;
+                right: 5%;
+            }
+            ul {
+                position: absolute;
+                right: 4%;
+                bottom: 9%;
+                background:white;
+                // margin: 0;
+                // width: 50%;
+                padding: 0;
+                li {
+                    display: block;
+                    text-align:right;
+                    border-left: 0;
+                    outline: none;
+                    border: none;
+                    button {
+                        width: 100%;
+                    }
+                    // width: 100%;
+                }
+                
+            }
+        }
+    }
+}
+
+
+
+
+
+// .home {
+//     // background:$white;
+//     height: 100vh;
+//     padding: 5vh 0;
+
+//     .home-wrapper{
+//         width: 80%;
+//         background: $white;
+//         margin: 0 auto;
+//         position: relative;
+//         // margin-top: 5vh;
+//         height: 90vh;
+//         border-radius: 20px;
+
+//         h1 {
+//             width: 80%;
+//             float: left;
+//             // text-align: center;
+//             margin: 0 0 10px 5%;
+//             font-size: 45px;
+//             font-family: $heading;
+//         }
+        
+//         button {
+//             position: absolute;
+//             right: 2%;
+//             top: 3%;
+//             font-family: $heading;
+//         }
+//         a {
+//             width: 33.33%;
+//             float: left;
+//             text-align: center;
+//             font-family: $heading;
+//             font-size: 20px;
+//             text-decoration: none;
+//             color: $green;
+            
+            
+//             &:visited {
+//                 text-decoration: none;
+//                 color: $green;
+//                 // color: $white;
+//             }
+//             // position: relative;
+//             // bottom: 0;
+//             // margin-right: 10px;
+//         }
+//     }
     
-}
+// }
 
-.partyButton {
-    max-height: 350px;
-    height: 500px;
-    margin: 0 auto;
-    position: relative;
-    h3 {
-        text-align: center;
-        font-family: $heading;
-        font-size: 36px;
-        margin-bottom: 0;
-        color: $green;
-    }
-    a{
-        position:absolute;
-        text-align: center;
-        left:50%;
-        transform: translateX(-50%);
+// .partyButton {
+//     max-height: 350px;
+//     height: 500px;
+//     margin: 0 auto;
+//     position: relative;
+//     h3 {
+//         text-align: center;
+//         font-family: $heading;
+//         font-size: 36px;
+//         margin-bottom: 0;
+//         color: $green;
+//     }
+//     a{
+//         position:absolute;
+//         text-align: center;
+//         left:50%;
+//         transform: translateX(-50%);
 
-    }
-    a img {
-        height: 300px;
-        background-color: $pink;
-        display: inline-block;
-        margin: 0 auto;
+//     }
+//     a img {
+//         height: 300px;
+//         background-color: $pink;
+//         display: inline-block;
+//         margin: 0 auto;
 
-    }
-}
+//     }
+// }
 
 

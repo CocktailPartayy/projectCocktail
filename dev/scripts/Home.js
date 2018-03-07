@@ -81,44 +81,22 @@ class Home extends React.Component {
 
     render() {
         return (
-            
-            
             <Fragment>
-                {this.state.loggedIn ?
-                    <Fragment>
-                        {/* <Brent /> */}
-                        {/* <Link to={`/`}>Home</Link> */}
-                        {/* <Link to={`/events`}>Events</Link> */}
-                        {/* <Link to={`/search`}>Search</Link> */}
-                        {/* <button onClick={this.signOut}>sign out</button> */}
-                        <div className="wrapper">
-                            <div className="partyButton animated tada infinite">
-                                <h3>LET'S PARTY Y'ALLL</h3>    
-                                <Link to={`/search`}><img src="../../assets/martini-icon.png" alt="" /></Link>
+                <div className='home-page'>
+                    <div className="wrapper">
+                        <h1 className='banner' >Welcome, {`${this.state.user.displayName}`}! 
+                            <div className='drink-icon'><img src="../../assets/drink-icon.png" alt="" /></div>
+                        </h1>
+
+                        <Link to={'/search'}>
+                            <div className='home-party animated bounceInDown'>
+                                <h2>let's party!</h2>
+                                <img src="../../assets/home-party.png" alt=""/>
                             </div>
-                        </div>
-                        {/* <button onClick={this.retrieveEvent}>get my shit</button> */}
-                        {/* what i wanna do is  <Search /> <Events /> <Favs /> */}
-                        </Fragment>
-
-
-
-                    :
-
-                    <div className="sign-in">
-                        <div><img className='animated tada infinite' src='../../assets/signin-bkg.png' alt="" /></div>
-                        <div>
-                            {/* <h1>Cocktail Partayyy</h1> */}
-                            <button onClick={this.signIn}>sign in!</button>
-                        </div>
+                        </Link>
                     </div>
-
-                }
-
-    
-
+                </div>
             </Fragment>
-               
         )
     }
 }
@@ -126,14 +104,32 @@ class Home extends React.Component {
 export default Home;
 
 
-{/* linda's example
-    <Route
-    path="/invite/:eventid" exact
-    render={(props) => (
-        <InviteLandingPage {...this.state.user}
-            {...props}
-            showLogin={this.showLogin}
-            showSignUp={this.showSignUp}
-            closeModal={this.closeModal}
-        />)}
-/> */}
+
+
+// <Fragment>
+//     {this.state.loggedIn ?
+//         <Fragment>
+//             <div className="wrapper">
+//                 <div className="partyButton">
+//                     <h3>LET'S PARTY Y'ALLL</h3>    
+//                     <Link to={`/search`}><img src="../../assets/martini-icon.png" alt="" /></Link>
+//                 </div>
+//             </div>
+//             </Fragment>
+
+
+
+//         :
+
+//         <div className="sign-in">
+//             <div><img className='animated tada infinite' src='../../assets/signin-bkg.png' alt="" /></div>
+//             <div>
+//                 <button onClick={this.signIn}>sign in!</button>
+//             </div>
+//         </div>
+
+//     }
+
+
+
+// </Fragment>
